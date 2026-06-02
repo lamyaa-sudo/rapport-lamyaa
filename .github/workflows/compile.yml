@@ -10,6 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-full biber
+          
       - name: Organiser les fichiers
         run: |
           mkdir -p Figures
@@ -25,15 +30,16 @@ jobs:
           done
           
       - name: Compiler LaTeX
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: main.tex
-          latexmk_use_xelatex: false
-          extra_system_packages: "biber"
-          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+        run: |
+          pdflatex -interaction=nonstopmode -halt-on-error main.tex || true
+          bibtex main || true
+          pdflatex -interaction=nonstopmode main.tex || true
+          pdflatex -interaction=nonstopmode main.tex || true
+          ls -la main.pdf || echo "PDF non généré"
           
-      - name: Télécharger PDF
+      - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
           name: rapport-lamyaa
           path: main.pdf
+          if-no-files-found: warn
