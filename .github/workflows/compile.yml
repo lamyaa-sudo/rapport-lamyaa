@@ -10,12 +10,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Compile LaTeX
+      - name: Organiser les fichiers
+        run: |
+          mkdir -p Figures
+          mkdir -p Logos
+          
+          # Copier logos
+          cp logo_fst.png Logos/ 2>/dev/null || true
+          cp logo_bewize.png Logos/ 2>/dev/null || true
+          cp bewize.jpg Logos/ 2>/dev/null || true
+          cp bewize.png Logos/ 2>/dev/null || true
+          
+          # Copier toutes les autres images dans Figures
+          for f in *.png *.jpg *.jpeg *.pdf; do
+            if [[ "$f" != logo_* ]] && [[ "$f" != bewize* ]]; then
+              cp "$f" Figures/ 2>/dev/null || true
+            fi
+          done
+          
+      - name: Compiler LaTeX
         uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
           
-      - name: Upload PDF
+      - name: Télécharger PDF
         uses: actions/upload-artifact@v4
         with:
           name: rapport-lamyaa
