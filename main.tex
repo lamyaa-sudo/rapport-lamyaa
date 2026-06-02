@@ -1,0 +1,164 @@
+\documentclass[12pt, oneside]{report}
+\usepackage{IEEEtrantools}
+\usepackage[left=2.5cm, right=2.5cm, top=2cm, bottom=2cm]{geometry}
+\linespread{1.5}
+\usepackage{times}
+\usepackage{xcolor}
+\usepackage[colorlinks=true, linkcolor=black, filecolor=black,
+    urlcolor=black, citebordercolor=white,
+    filebordercolor=white, urlbordercolor=white,
+    pdftitle={Rapport de Stage - Lamyaa Lamssaoui - Bewize}, 
+    pdfpagemode=FullScreen]{hyperref}
+\usepackage[style=authoryear, defernumbers=true, backend=bibtex,
+    dashed=false, maxnames=999, maxcitenames=3, giveninits=true,
+    urldate=long, uniquename=false, uniquelist=false
+]{biblatex}
+\addbibresource{references.bib}
+\usepackage{caption}
+\usepackage{float}
+\usepackage[french]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{Rule}{Rule}
+\numberwithin{definition}{chapter}
+\numberwithin{theorem}{chapter}
+\numberwithin{lemma}{chapter}
+\numberwithin{Rule}{chapter}
+\numberwithin{equation}{chapter}
+\usepackage[super]{nth}
+\usepackage{graphicx}
+\usepackage{placeins}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{csquotes}
+\usepackage{fancyhdr}
+
+% En-tête sans logo (obligatoire FST)
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead{}
+\fancyhead[L]{}
+\fancyhead[R]{Lamyaa Lamssaoui}
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+
+% Pages préliminaires sans en-tête ni pied de page
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+\usepackage{titlesec}
+\titlespacing{\chapter}{0pt}{*4}{*2.5}
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \perdatasource{references.bib}
+      \step[fieldset=keywords, fieldvalue={, primary}, append]
+    }
+    \map{
+      \perdatasource{biblio.bib}
+      \step[fieldset=keywords, fieldvalue={, secondary}, append]
+    }
+  }
+}
+\input{formatting}
+
+% Couleurs uniquement noir (obligatoire FST)
+\definecolor{titleColor}{RGB}{0,0,0}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{50pt}{40pt}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{titleColor}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\itshape}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\itshape}{\thesubsubsection}{1em}{}
+
+\usepackage{pdfpages}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,fit,calc}
+\begin{document}
+
+% PAGE DE GARDE
+\pagestyle{empty}
+\input{titlepage}
+
+% Bismillah
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+    \includegraphics[width=0.6\textwidth]{Figures/bismillah.png}
+\end{center}
+\vspace*{\fill}
+
+% PAGES PRELIMINAIRES
+\pagenumbering{roman}
+\setcounter{page}{1}
+\pagestyle{plain}
+
+\newpage
+\input{Dedicace}
+
+\newpage
+\input{remerciement}
+
+\newpage
+\input{Résumé}
+
+\newpage
+\input{Abreviations}
+
+\newpage
+\listoftables
+
+\newpage
+\listoffigures
+
+\newpage
+\tableofcontents
+
+% CORPS DU RAPPORT
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\pagestyle{fancy}
+
+\newpage
+\input{Introduction}
+
+\newpage
+\input{Entreprise_acceuil}
+
+\newpage
+\input{Cadrage de besoin et analyse}
+
+\newpage
+ \input{Conception et architecture}
+
+\newpage
+ \input{Mise en œuvre}
+
+\newpage
+ \input{Test et résultats}
+
+\newpage
+ \input{Conclusion générale}
+
+% BIBLIOGRAPHIE
+\newpage
+\printbibliography[nottype=misc,title={Bibliographie}]
+\newpage
+\printbibliography[type=misc,title={Webographie}]
+
+% GLOSSAIRE
+\newpage
+\input{Glossaire}
+
+\end{document}

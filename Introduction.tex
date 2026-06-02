@@ -1,0 +1,151 @@
+\chapter{Introduction générale}
+
+\section{Contexte général}
+Le secteur du développement logiciel et des applications mobiles connaît 
+aujourd'hui une croissance exponentielle, portée par la digitalisation 
+massive des services et l'adoption généralisée des smartphones dans notre 
+quotidien. Dans ce contexte hautement concurrentiel, la qualité de 
+l'expérience utilisateur est devenue un facteur différenciant majeur 
+pour toute entreprise proposant une application mobile. Les utilisateurs 
+sont de plus en plus exigeants et n'hésitent pas à abandonner une 
+application qui ne répond pas à leurs attentes ou qui ne leur offre 
+pas un canal de communication direct avec l'équipe produit.
+
+C'est dans ce contexte que s'inscrit mon stage de licence au sein de 
+Bewize, une entreprise innovante proposant une application mobile à 
+destination de ses utilisateurs. Bewize, consciente de l'importance 
+de l'écoute client dans l'amélioration continue de son produit, a 
+identifié un besoin crucial : permettre à ses utilisateurs de transmettre 
+facilement leurs feedbacks et réclamations directement depuis l'application 
+mobile, et centraliser ces retours dans un espace dédié accessible 
+par l'équipe interne.
+
+\section{Présentation de l'entreprise Bewize}
+Bewize est une entreprise spécialisée dans le développement d'applications 
+mobiles, dont le siège est situé à Casablanca. Elle développe et maintient 
+une application mobile destinée à ses utilisateurs, accompagnée d'un 
+dashboard monitor interne permettant à ses équipes de gérer et analyser 
+les données liées à l'utilisation de l'application.
+
+L'équipe de Bewize est organisée autour de plusieurs pôles complémentaires : 
+une équipe produit pilotée par le Product Manager, une équipe technique 
+encadrée par le Tech Lead, une équipe de développement et une équipe 
+marketing digital. Cette organisation pluridisciplinaire favorise une 
+approche holistique du développement produit, où les considérations 
+techniques, fonctionnelles et marketing sont constamment alignées.
+
+Mon stage s'est déroulé au sein de cette équipe dynamique et bienveillante, 
+sous la supervision directe du Product Manager et avec l'encadrement 
+technique du Tech Lead. Cette double supervision m'a permis de bénéficier 
+à la fois d'une vision produit claire et d'un accompagnement technique 
+de qualité tout au long de mon stage.
+
+\section{Problématique}
+Avant le développement de la fonctionnalité objet de ce stage, les 
+utilisateurs de l'application mobile Bewize ne disposaient d'aucun 
+moyen simple et intégré pour communiquer leurs retours à l'équipe Bewize. 
+Cette absence de canal de communication directe engendrait plusieurs 
+problèmes concrets :
+
+\begin{itemize}
+    \item Les utilisateurs insatisfaits n'avaient pas de moyen simple 
+    pour signaler un problème ou exprimer une réclamation, ce qui 
+    pouvait conduire à l'abandon de l'application sans que l'équipe 
+    Bewize ne soit informée des causes.
+    
+    \item L'équipe produit ne disposait pas d'une source structurée 
+    et centralisée de retours utilisateurs pour orienter ses décisions 
+    de développement et améliorer continuellement le produit.
+    
+    \item Le traitement des rares réclamations reçues par d'autres 
+    canaux (email, réseaux sociaux) était manuel, non systématisé 
+    et difficile à suivre dans le temps.
+    
+    \item L'absence de données structurées sur la satisfaction 
+    utilisateur rendait difficile l'évaluation objective de la qualité 
+    de l'application et l'identification des axes d'amélioration prioritaires.
+\end{itemize}
+
+Face à cette problématique, la question centrale de mon stage a été 
+la suivante : \textbf{Comment développer une fonctionnalité simple, 
+accessible et fiable permettant aux utilisateurs de l'application 
+mobile Bewize de transmettre facilement leurs feedbacks et réclamations, 
+et à l'équipe interne de les consulter et les traiter efficacement ?}
+
+\section{Objectifs du stage}
+Pour répondre à cette problématique, mon stage chez Bewize s'est 
+articulé autour de quatre objectifs principaux, définis conjointement 
+avec le Product Manager lors de la phase de cadrage :
+
+\begin{itemize}
+    \item \textbf{Objectif 1 — Développer le formulaire WebView :} 
+    concevoir et développer une page WebView en React JS contenant 
+    un formulaire simple et intuitif permettant à l'utilisateur de 
+    soumettre un feedback ou une réclamation en quelques clics depuis 
+    l'application mobile.
+    
+    \item \textbf{Objectif 2 — Intégrer dans l'application mobile :} 
+    intégrer la page WebView dans l'application mobile React Native 
+    existante de Bewize, en ajoutant un bouton d'accès dédié et en 
+    assurant une navigation fluide entre les différents écrans.
+    
+    \item \textbf{Objectif 3 — Développer le back-end :} créer les 
+    APIs REST nécessaires avec Spring Boot pour recevoir, valider, 
+    traiter et persister les données de feedbacks et réclamations 
+    dans la base de données PostgreSQL.
+    
+    \item \textbf{Objectif 4 — Développer le dashboard monitor :} 
+    enrichir le dashboard monitor interne de Bewize avec une interface 
+    de consultation et de traitement des feedbacks et réclamations 
+    reçus, avec des fonctionnalités de filtrage et de gestion des statuts.
+\end{itemize}
+
+\section{Méthodologie adoptée}
+Pour atteindre ces objectifs dans les délais impartis du stage, 
+j'ai travaillé en suivant la méthodologie Agile Scrum, déjà adoptée 
+par l'équipe de développement de Bewize. Cette approche itérative 
+et incrémentale m'a permis d'organiser mon travail en trois Sprints 
+de deux semaines chacun, de livrer régulièrement des résultats 
+tangibles au Product Manager et de m'adapter rapidement aux 
+ajustements demandés en cours de développement.
+
+Les outils et technologies utilisés pour mener à bien ce projet 
+sont les suivants : React JS et React Native pour le développement 
+front-end, Spring Boot pour le back-end, PostgreSQL pour la base 
+de données, Docker pour la conteneurisation, et Git avec GitHub 
+pour le versioning et la collaboration.
+
+\section{Structure du rapport}
+Ce rapport de stage est organisé en cinq chapitres qui suivent 
+la progression naturelle du projet, depuis l'analyse des besoins 
+jusqu'aux résultats obtenus :
+
+\begin{itemize}
+    \item \textbf{Chapitre 1 — Présentation de l'entreprise :} 
+    ce chapitre présente Bewize, son activité, son organisation 
+    et son écosystème technique existant avant le début du stage.
+    
+    \item \textbf{Chapitre 2 — Cadrage de besoin et analyse :} 
+    ce chapitre détaille l'analyse des besoins fonctionnels et 
+    non fonctionnels, l'étude de l'existant, la solution proposée 
+    et le planning du stage.
+    
+    \item \textbf{Chapitre 3 — Conception et architecture :} 
+    ce chapitre présente la méthodologie Agile Scrum adoptée, 
+    les technologies utilisées, l'architecture globale de la 
+    solution et la modélisation UML du système.
+    
+    \item \textbf{Chapitre 4 — Mise en œuvre :} ce chapitre 
+    décrit en détail l'implémentation technique de chaque composant 
+    de la solution, depuis le formulaire WebView jusqu'au dashboard 
+    monitor, en passant par le back-end Spring Boot.
+    
+    \item \textbf{Chapitre 5 — Test et résultats :} ce chapitre 
+    présente la stratégie de test adoptée, les tests réalisés 
+    à différents niveaux et les résultats obtenus, confirmant 
+    la qualité et la fiabilité de la solution développée.
+\end{itemize}
+
+Ce rapport se conclut par une conclusion générale qui dresse 
+le bilan du projet, présente les compétences acquises et propose 
+des perspectives d'évolution pour la solution développée.
