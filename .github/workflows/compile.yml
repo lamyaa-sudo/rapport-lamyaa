@@ -14,15 +14,11 @@ jobs:
         run: |
           mkdir -p Figures
           mkdir -p Logos
-          
-          # Copier logos
           cp logo_fst.png Logos/ 2>/dev/null || true
           cp logo_bewize.png Logos/ 2>/dev/null || true
           cp bewize.jpg Logos/ 2>/dev/null || true
           cp bewize.png Logos/ 2>/dev/null || true
-          
-          # Copier toutes les autres images dans Figures
-          for f in *.png *.jpg *.jpeg *.pdf; do
+          for f in *.png *.jpg *.jpeg; do
             if [[ "$f" != logo_* ]] && [[ "$f" != bewize* ]]; then
               cp "$f" Figures/ 2>/dev/null || true
             fi
@@ -32,6 +28,9 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
+          latexmk_use_xelatex: false
+          extra_system_packages: "biber"
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
           
       - name: Télécharger PDF
         uses: actions/upload-artifact@v4
