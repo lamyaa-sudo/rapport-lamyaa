@@ -1,561 +1,86 @@
 \chapter{Test et résultats}
 
 \section{Introduction}
-Ce chapitre présente les tests réalisés pour valider la fonctionnalité 
-de recueil de feedbacks et de réclamations développée dans le cadre 
-du stage chez Bewize, ainsi que les résultats obtenus. La phase de 
-test constitue une étape indispensable dans tout cycle de développement 
-logiciel, car elle permet de s'assurer que la solution développée 
-répond correctement aux besoins exprimés et fonctionne de manière 
-fiable dans toutes les situations prévues.
-
-Les tests ont été réalisés en collaboration avec le Tech Lead et 
-le Product Manager de Bewize, en suivant une approche structurée 
-couvrant plusieurs niveaux de test : les tests unitaires, les tests 
-d'intégration et les tests fonctionnels bout en bout. Cette approche 
-multi-niveaux garantit une couverture complète de la solution et 
-une confiance maximale dans la qualité du livrable final.
+Afin de garantir la qualité et le bon fonctionnement du parcours de 
+réclamation développé, une phase de tests a été réalisée tout au long 
+du projet. Au sein de Bewize, les tests sont réalisés selon deux 
+approches complémentaires : les tests fonctionnels manuels et les 
+tests automatisés.
 
 %==========================================================
-\section{Stratégie de test}
+\section{Stratégie de test chez Bewize}
 %==========================================================
 
-\subsection{Niveaux de test adoptés}
-La stratégie de test adoptée pour ce projet s'appuie sur la pyramide 
-de tests, un modèle reconnu dans l'industrie du développement logiciel 
-qui préconise une répartition équilibrée entre les différents types 
-de tests. Cette pyramide recommande d'avoir un grand nombre de tests 
-unitaires à la base, un nombre intermédiaire de tests d'intégration 
-au milieu, et un nombre réduit de tests fonctionnels bout en bout 
-au sommet.
+Les tests automatisés sont mis en place à l'aide de l'outil Maestro, 
+qui permet d'automatiser les scénarios utilisateurs et de vérifier 
+automatiquement le bon fonctionnement de l'application après chaque 
+évolution. Cependant, en raison des contraintes de temps du stage, 
+cette partie n'a pas été directement couverte dans le cadre des 
+missions confiées et a été prise en charge par un autre membre de 
+l'équipe de développement.
 
-\begin{figure}[H]
-    \centering
-    %\includegraphics[width=0.75\textwidth]{Figures/pyramide_tests.png}
-    \caption{Pyramide de tests adoptée pour le projet}
-    \label{fig:pyramide_tests}
-\end{figure}
+%==========================================================
+\section{Tests fonctionnels manuels}
+%==========================================================
 
-Les trois niveaux de test mis en œuvre sont les suivants :
+La participation aux tests s'est concentrée principalement sur les 
+tests fonctionnels manuels réalisés sur l'environnement de développement. 
+Ces tests consistaient à vérifier le comportement du parcours de 
+réclamation en reproduisant les différents scénarios d'utilisation 
+prévus par les utilisateurs.
 
-\begin{itemize}
-    \item \textbf{Tests unitaires :} ils testent chaque composant 
-    ou fonction de manière isolée, sans dépendance avec les autres 
-    composants du système. Ces tests sont rapides à exécuter et 
-    faciles à maintenir.
-    
-    \item \textbf{Tests d'intégration :} ils vérifient la bonne 
-    communication et interaction entre les différents composants 
-    du système, notamment entre le front-end et le back-end, et 
-    entre le back-end et la base de données.
-    
-    \item \textbf{Tests fonctionnels bout en bout :} ils simulent 
-    le comportement réel d'un utilisateur en testant le parcours 
-    complet depuis l'application mobile jusqu'au dashboard monitor, 
-    en passant par la WebView et l'API.
-\end{itemize}
-
-\subsection{Environnement de test}
-Les tests ont été réalisés dans un environnement dédié, distinct 
-de l'environnement de développement et de production. Cet environnement 
-de test utilise une base de données PostgreSQL séparée, peuplée avec 
-des données de test représentatives des cas d'utilisation réels.
+\subsection{Déroulement des tests}
+Lors des vérifications, les anomalies et dysfonctionnements identifiés 
+étaient remontés au Product Manager. Après analyse et priorisation 
+des besoins, les corrections étaient intégrées dans les cycles de 
+développement suivants afin d'améliorer progressivement la qualité 
+de la solution.
 
 \begin{table}[H]
 \centering
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{|p{4cm}|p{8cm}|}
-\hline
-\textbf{Composant} & \textbf{Configuration de test} \\
-\hline
-Base de données & PostgreSQL de test avec données fictives \\
-\hline
-Back-end Spring Boot & Instance de test avec profil "test" activé \\
-\hline
-WebView React JS & Build de test accessible via localhost \\
-\hline
-Dashboard monitor & Build de test accessible via localhost \\
-\hline
-Application mobile & Émulateur Android et simulateur iOS \\
-\hline
-Outil de test API & Postman avec collection de tests dédiée \\
-\hline
-\end{tabular}
-\caption{Environnement de test}
-\label{tab:env_test}
-\end{table}
-
-%==========================================================
-\section{Tests unitaires}
-%==========================================================
-
-\subsection{Tests unitaires du back-end Spring Boot}
-Les tests unitaires du back-end ont été développés en utilisant 
-JUnit 5, le framework de test standard pour les applications Java, 
-combiné avec Mockito pour la simulation des dépendances. Ces tests 
-couvrent principalement la couche service, qui contient la logique 
-métier de l'application.
-
-Les méthodes testées incluent :
-\begin{itemize}
-    \item \textbf{Création d'un feedback valide :} vérification que 
-    le statut est initialisé à NOUVEAU, que la date d'envoi est 
-    correctement générée et que les données sont sauvegardées
-    \item \textbf{Création avec données invalides :} vérification 
-    que les exceptions appropriées sont levées en cas de données 
-    manquantes ou incorrectes
-    \item \textbf{Récupération d'un feedback par ID :} vérification 
-    du retour correct ou de l'exception ResourceNotFoundException
-    \item \textbf{Mise à jour du statut :} vérification que les 
-    transitions de statut valides sont acceptées et les invalides rejetées
-    \item \textbf{Calcul des statistiques :} vérification de l'exactitude 
-    des comptages par type et par statut
-\end{itemize}
-
-\begin{table}[H]
-\centering
+\caption{Scénarios de tests fonctionnels manuels réalisés}
+\label{tab:tests_manuels}
 \renewcommand{\arraystretch}{1.8}
-\begin{tabular}{|c|p{5cm}|p{2.5cm}|p{2.5cm}|}
-\hline
-\textbf{ID} & \textbf{Test} & \textbf{Résultat attendu} & 
-\textbf{Résultat} \\
-\hline
-UT01 & Création feedback avec données valides & 
-Feedback créé avec statut NOUVEAU & Succès \\
-\hline
-UT02 & Création feedback avec message vide & 
-Exception levée & Succès \\
-\hline
-UT03 & Création feedback avec type null & 
-Exception levée & Succès \\
-\hline
-UT04 & Récupération feedback existant par ID & 
-Feedback retourné & Succès \\
-\hline
-UT05 & Récupération feedback inexistant & 
-ResourceNotFoundException & Succès \\
-\hline
-UT06 & Mise à jour statut NOUVEAU vers EN\_COURS & 
-Statut mis à jour & Succès \\
-\hline
-UT07 & Mise à jour statut EN\_COURS vers TRAITE & 
-Statut mis à jour & Succès \\
-\hline
-UT08 & Calcul statistiques avec données variées & 
-Comptages exacts & Succès \\
-\hline
-\end{tabular}
-\caption{Résultats des tests unitaires back-end}
-\label{tab:tests_unitaires}
-\end{table}
-
-\begin{figure}[H]
-    \centering
-    %\includegraphics[width=0.9\textwidth]{Figures/junit_results.png}
-    \caption{Résultats des tests unitaires JUnit}
-    \label{fig:junit_results}
-\end{figure}
-
-\subsection{Tests unitaires du front-end React JS}
-Les tests unitaires du front-end ont été développés en utilisant 
-Jest et React Testing Library, les outils de test standards pour 
-les applications React JS. Ces tests vérifient le comportement 
-correct de chaque composant React de manière isolée.
-
-Les composants testés incluent :
-\begin{itemize}
-    \item \textbf{Composant formulaire :} vérification du rendu 
-    correct, de la gestion des changements de valeurs et de la 
-    soumission du formulaire
-    \item \textbf{Validation des champs :} vérification que les 
-    messages d'erreur appropriés sont affichés en cas de données invalides
-    \item \textbf{Message de confirmation :} vérification que le 
-    message de succès s'affiche correctement après l'envoi
-    \item \textbf{Gestion des erreurs réseau :} vérification que 
-    le message d'erreur s'affiche correctement en cas d'échec de l'API
-\end{itemize}
-
-%==========================================================
-\section{Tests d'intégration}
-%==========================================================
-
-\subsection{Tests d'intégration de l'API REST}
-Les tests d'intégration de l'API REST ont été réalisés avec Postman, 
-un outil professionnel de test d'APIs. Une collection Postman complète 
-a été créée pour tester l'ensemble des endpoints de manière systématique 
-et reproductible.
-
-\begin{figure}[H]
-    \centering
-    %\includegraphics[width=0.9\textwidth]{Figures/postman_collection.png}
-    \caption{Collection Postman des tests d'intégration}
-    \label{fig:postman_collection}
-\end{figure}
-
-\subsubsection{Test POST /api/feedbacks}
-Ce test vérifie la création correcte d'un nouveau feedback ou 
-réclamation via l'API REST. Plusieurs scénarios ont été testés :
-
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.8}
-\begin{tabular}{|c|p{4cm}|p{2.5cm}|p{2.5cm}|p{1.5cm}|}
-\hline
-\textbf{ID} & \textbf{Scénario} & \textbf{Données envoyées} & 
-\textbf{Résultat attendu} & \textbf{Statut} \\
-\hline
-IT01 & Feedback valide & Type + Message & HTTP 201 & Succès \\
-\hline
-IT02 & Réclamation valide & Type + Message & HTTP 201 & Succès \\
-\hline
-IT03 & Message vide & Type uniquement & HTTP 400 & Succès \\
-\hline
-IT04 & Type manquant & Message uniquement & HTTP 400 & Succès \\
-\hline
-IT05 & Corps de requête vide & Aucune donnée & HTTP 400 & Succès \\
-\hline
-\end{tabular}
-\caption{Tests d'intégration — POST /api/feedbacks}
-\label{tab:test_post}
-\end{table}
-
-\subsubsection{Test GET /api/feedbacks}
-Ce test vérifie la récupération correcte de la liste des feedbacks 
-et réclamations, avec et sans filtres appliqués :
-
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.8}
-\begin{tabular}{|c|p{4.5cm}|p{3cm}|p{2cm}|}
-\hline
-\textbf{ID} & \textbf{Scénario} & \textbf{Résultat attendu} & 
-\textbf{Statut} \\
-\hline
-IT06 & Liste sans filtre & Tous les retours & Succès \\
-\hline
-IT07 & Filtre par type FEEDBACK & Feedbacks uniquement & Succès \\
-\hline
-IT08 & Filtre par type RECLAMATION & Réclamations uniquement & Succès \\
-\hline
-IT09 & Filtre par statut NOUVEAU & Retours NOUVEAU & Succès \\
-\hline
-IT10 & Filtre par statut TRAITE & Retours TRAITE & Succès \\
-\hline
-\end{tabular}
-\caption{Tests d'intégration — GET /api/feedbacks}
-\label{tab:test_get}
-\end{table}
-
-\subsubsection{Test PUT /api/feedbacks/\{id\}/statut}
-Ce test vérifie la mise à jour correcte du statut d'un feedback :
-
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.8}
-\begin{tabular}{|c|p{4.5cm}|p{3cm}|p{2cm}|}
-\hline
-\textbf{ID} & \textbf{Scénario} & \textbf{Résultat attendu} & 
-\textbf{Statut} \\
-\hline
-IT11 & Passage à EN\_COURS & Statut mis à jour & Succès \\
-\hline
-IT12 & Passage à TRAITE & Statut mis à jour & Succès \\
-\hline
-IT13 & ID inexistant & HTTP 404 & Succès \\
-\hline
-IT14 & Statut invalide & HTTP 400 & Succès \\
-\hline
-\end{tabular}
-\caption{Tests d'intégration — PUT statut}
-\label{tab:test_put}
-\end{table}
-
-\subsection{Tests d'intégration base de données}
-Les tests d'intégration de la base de données ont vérifié la 
-persistance correcte des données dans PostgreSQL :
-
-\begin{itemize}
-    \item Vérification que les feedbacks sont correctement enregistrés 
-    avec tous leurs attributs dans la table feedback
-    \item Vérification de l'intégrité des données après mise à jour 
-    du statut de traitement
-    \item Vérification des contraintes de la base de données (NOT NULL, 
-    types de données)
-    \item Vérification des performances des requêtes de filtrage 
-    avec un volume de données représentatif
-\end{itemize}
-
-\begin{figure}[H]
-    \centering
-    %\includegraphics[width=0.88\textwidth]{Figures/pgadmin_data.png}
-    \caption{Données de test dans PostgreSQL via pgAdmin}
-    \label{fig:pgadmin_data}
-\end{figure}
-
-%==========================================================
-\section{Tests fonctionnels bout en bout}
-%==========================================================
-
-\subsection{Présentation des tests fonctionnels}
-Les tests fonctionnels bout en bout simulent le comportement réel 
-des utilisateurs et valident le parcours complet de la fonctionnalité. 
-Ces tests ont été réalisés en collaboration avec le Tech Lead et 
-validés par le Product Manager de Bewize lors de la Sprint Review 
-du dernier Sprint.
-
-\subsection{Scénario 1 — Envoi d'un feedback depuis l'application mobile}
-
-\textbf{Objectif :} Vérifier que l'utilisateur peut envoyer un 
-feedback depuis l'application mobile et que les données apparaissent 
-correctement dans le dashboard monitor.
-
-\textbf{Étapes du test :}
-\begin{enumerate}
-    \item Lancer l'application mobile Bewize sur un émulateur Android
-    \item Localiser et cliquer sur le bouton feedback dans l'interface
-    \item Vérifier que la WebView s'ouvre correctement
-    \item Sélectionner le type "Feedback"
-    \item Saisir un message de test
-    \item Cliquer sur le bouton Envoyer
-    \item Vérifier que le message de confirmation s'affiche
-    \item Accéder au dashboard monitor
-    \item Vérifier que le feedback apparaît dans la liste avec le 
-    statut NOUVEAU
-\end{enumerate}
-
-\textbf{Résultat :} $\checkmark$ Test réussi — Le feedback est correctement 
-envoyé et affiché dans le dashboard avec toutes ses informations.
-
-\begin{figure}[H]
-    \centering
-    %\includegraphics[width=0.85\textwidth]{Figures/test_feedback.png}
-    \caption{Test fonctionnel — Envoi d'un feedback}
-    \label{fig:test_feedback}
-\end{figure}
-
-\subsection{Scénario 2 — Envoi d'une réclamation et traitement}
-
-\textbf{Objectif :} Vérifier le parcours complet d'une réclamation, 
-depuis son envoi par l'utilisateur mobile jusqu'à son traitement 
-complet par l'équipe Bewize dans le dashboard monitor.
-
-\textbf{Étapes du test :}
-\begin{enumerate}
-    \item Envoyer une réclamation depuis la WebView mobile
-    \item Vérifier la réception dans le dashboard monitor
-    \item Changer le statut de NOUVEAU à EN\_COURS
-    \item Vérifier la mise à jour dans le dashboard
-    \item Changer le statut de EN\_COURS à TRAITE
-    \item Vérifier le statut final dans la liste
-\end{enumerate}
-
-\textbf{Résultat :} $\checkmark$ Test réussi — La réclamation est traitée 
-correctement avec les transitions de statut fonctionnelles.
-
-\begin{figure}[H]
-    \centering
-    %\includegraphics[width=0.85\textwidth]{Figures/test_reclamation.png}
-    \caption{Test fonctionnel — Traitement d'une réclamation}
-    \label{fig:test_reclamation}
-\end{figure}
-
-\subsection{Scénario 3 — Validation du formulaire}
-
-\textbf{Objectif :} Vérifier que la validation des champs fonctionne 
-correctement et empêche l'envoi de données invalides.
-
-\textbf{Étapes du test :}
-\begin{enumerate}
-    \item Ouvrir le formulaire WebView
-    \item Cliquer sur Envoyer sans remplir aucun champ
-    \item Vérifier que les messages de validation s'affichent
-    \item Remplir uniquement le type sans le message
-    \item Vérifier que le message de validation s'affiche
-    \item Remplir tous les champs correctement
-    \item Vérifier que l'envoi réussit
-\end{enumerate}
-
-\textbf{Résultat :} $\checkmark$ Test réussi — La validation fonctionne 
-correctement dans tous les cas testés.
-
-\subsection{Scénario 4 — Filtrage dans le dashboard}
-
-\textbf{Objectif :} Vérifier que les filtres du dashboard monitor 
-fonctionnent correctement et retournent les résultats attendus.
-
-\textbf{Étapes du test :}
-\begin{enumerate}
-    \item Envoyer plusieurs feedbacks et réclamations de test
-    \item Accéder au dashboard monitor
-    \item Appliquer le filtre "Type : Feedback"
-    \item Vérifier que seuls les feedbacks s'affichent
-    \item Appliquer le filtre "Statut : NOUVEAU"
-    \item Vérifier que seuls les retours NOUVEAU s'affichent
-    \item Combiner les deux filtres
-    \item Vérifier que les résultats correspondent aux deux critères
-\end{enumerate}
-
-\textbf{Résultat :} $\checkmark$ Test réussi — Les filtres fonctionnent 
-correctement individuellement et en combinaison.
-
-\begin{figure}[H]
-    \centering
-    %\includegraphics[width=0.85\textwidth]{Figures/test_filtre.png}
-    \caption{Test fonctionnel — Filtrage dans le dashboard}
-    \label{fig:test_filtre}
-\end{figure}
-
-\subsection{Tableau récapitulatif des tests fonctionnels}
-
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.8}
-\begin{tabular}{|c|p{5cm}|p{2.5cm}|p{2.5cm}|}
+\begin{tabular}{|c|p{5cm}|p{4cm}|p{2cm}|}
 \hline
 \textbf{ID} & \textbf{Scénario testé} & \textbf{Résultat attendu} & 
-\textbf{Résultat obtenu} \\
+\textbf{Statut} \\
 \hline
-TF01 & Envoi feedback depuis mobile & Données en base, confirmation & 
-Conforme \\
+TF01 & Envoi d'une réclamation depuis la WebView & 
+Confirmation affichée & Conforme \\
 \hline
-TF02 & Envoi réclamation depuis mobile & Données en base, confirmation & 
-Conforme \\
+TF02 & Soumission avec champs vides & 
+Messages d'erreur affichés & Conforme \\
 \hline
-TF03 & Validation champs vides & Messages d'erreur affichés & 
-Conforme \\
+TF03 & Consultation des retours dans le dashboard & 
+Liste affichée correctement & Conforme \\
 \hline
-TF04 & Consultation dashboard & Liste complète affichée & 
-Conforme \\
+TF04 & Filtrage par type et statut & 
+Résultats filtrés correctement & Conforme \\
 \hline
-TF05 & Filtre par type & Résultats filtrés correctement & 
-Conforme \\
+TF05 & Changement de statut d'une réclamation & 
+Statut mis à jour & Conforme \\
 \hline
-TF06 & Filtre par statut & Résultats filtrés correctement & 
-Conforme \\
-\hline
-TF07 & Changement statut NOUVEAU à EN\_COURS & Statut mis à jour & 
-Conforme \\
-\hline
-TF08 & Changement statut EN\_COURS à TRAITE & Statut mis à jour & 
-Conforme \\
-\hline
-TF09 & Affichage statistiques & Données calculées correctement & 
-Conforme \\
-\hline
-TF10 & Test sur émulateur Android & Fonctionnel sur Android & 
-Conforme \\
-\hline
-TF11 & Test sur simulateur iOS & Fonctionnel sur iOS & 
-Conforme \\
+TF06 & Affichage du formulaire WebView sur mobile & 
+Formulaire fonctionnel & Conforme \\
 \hline
 \end{tabular}
-\caption{Tableau récapitulatif des tests fonctionnels}
-\label{tab:tests_fonctionnels}
 \end{table}
 
-%==========================================================
-\section{Résultats et bilan}
-%==========================================================
-
-\subsection{Résultats globaux}
-L'ensemble des tests réalisés ont abouti à des résultats très 
-satisfaisants, confirmant la qualité et la fiabilité de la 
-solution développée. Le taux de réussite global des tests 
-est de 100\%, avec tous les scénarios testés conformes 
-aux résultats attendus.
-
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.8}
-\begin{tabular}{|p{4cm}|c|c|c|}
-\hline
-\textbf{Type de test} & \textbf{Tests réalisés} & 
-\textbf{Tests réussis} & \textbf{Taux de réussite} \\
-\hline
-Tests unitaires back-end & 8 & 8 & 100\% \\
-\hline
-Tests unitaires front-end & 6 & 6 & 100\% \\
-\hline
-Tests d'intégration API & 14 & 14 & 100\% \\
-\hline
-Tests fonctionnels & 11 & 11 & 100\% \\
-\hline
-\textbf{Total} & \textbf{39} & \textbf{39} & \textbf{100\%} \\
-\hline
-\end{tabular}
-\caption{Bilan global des tests}
-\label{tab:bilan_tests}
-\end{table}
-
-\begin{figure}[H]
-    \centering
-    %\includegraphics[width=0.8\textwidth]{Figures/bilan_tests.png}
-    \caption{Représentation graphique du bilan des tests}
-    \label{fig:bilan_tests}
-\end{figure}
-
-\subsection{Résultats attendus atteints}
-À l'issue des tests, tous les résultats attendus définis dans le 
-cahier des charges ont été atteints :
-
-\begin{itemize}
-    \item \textbf{Fonctionnalité de recueil de feedbacks :} $\checkmark$ 
-    Les utilisateurs peuvent envoyer facilement leurs feedbacks 
-    depuis l'application mobile via la WebView
-    
-    \item \textbf{Fonctionnalité de recueil de réclamations :} $\checkmark$ 
-    Les utilisateurs peuvent envoyer leurs réclamations en quelques 
-    clics depuis l'application mobile
-    
-    \item \textbf{Page WebView accessible depuis le mobile :} $\checkmark$ 
-    La WebView s'ouvre correctement dans l'application mobile sans 
-    redirection vers un navigateur externe
-    
-    \item \textbf{Transmission des données vers le back-end :} $\checkmark$ 
-    Les données sont transmises de manière fiable et sécurisée via 
-    les APIs REST Spring Boot
-    
-    \item \textbf{Affichage dans le dashboard monitor :} $\checkmark$ 
-    L'équipe Bewize peut consulter, filtrer et traiter les retours 
-    reçus depuis le dashboard monitor interne
-    
-    \item \textbf{Parcours testé de bout en bout :} $\checkmark$ 
-    Le parcours complet a été validé avec succès depuis l'envoi 
-    par l'utilisateur jusqu'au traitement par l'équipe Bewize
-\end{itemize}
-
-\subsection{Validation par le Product Manager}
-La solution développée a été présentée au Product Manager de Bewize 
-lors de la Sprint Review finale. Cette démonstration a couvert 
-l'ensemble du parcours utilisateur : l'envoi d'un feedback depuis 
-l'application mobile, la réception dans le dashboard monitor et 
-le traitement de la réclamation. Le Product Manager a validé 
-la solution et confirmé qu'elle répond pleinement aux attentes 
-et aux besoins exprimés dans le cahier des charges.
-
-\begin{figure}[H]
-    \centering
-    %\includegraphics[width=0.85\textwidth]{Figures/validation_pm.png}
-    \caption{Démonstration de la solution au Product Manager}
-    \label{fig:validation_pm}
-\end{figure}
+Le tableau \ref{tab:tests_manuels} présente les six scénarios de tests 
+fonctionnels manuels réalisés sur l'environnement de développement. 
+Ces tests couvrent les principales fonctionnalités du parcours de 
+réclamation, depuis l'envoi du formulaire WebView jusqu'à la 
+consultation et le traitement dans le dashboard monitor.
 
 %==========================================================
 \section{Conclusion}
 %==========================================================
 
-Ce chapitre a présenté l'ensemble des tests réalisés pour valider 
-la fonctionnalité de recueil de feedbacks et de réclamations 
-développée chez Bewize, ainsi que les résultats obtenus.
-
-La stratégie de test adoptée, couvrant trois niveaux complémentaires 
-(tests unitaires, tests d'intégration et tests fonctionnels bout 
-en bout), a permis de valider la solution de manière exhaustive 
-et rigoureuse. Le taux de réussite de 100\% sur l'ensemble des 
-39 tests réalisés confirme la qualité et la fiabilité de 
-l'implémentation.
-
-L'ensemble des résultats attendus définis dans le cahier des charges 
-ont été atteints et validés par le Product Manager de Bewize lors 
-de la Sprint Review finale. La solution est fonctionnelle, fiable 
-et prête à être déployée en production dans l'environnement Bewize.
+Cette démarche de tests fonctionnels manuels a permis de valider 
+les fonctionnalités développées, d'identifier les points d'amélioration 
+et de garantir une expérience utilisateur conforme aux objectifs 
+du projet. Les anomalies identifiées ont été remontées au Product 
+Manager et corrigées dans les cycles de développement suivants, 
+contribuant ainsi à améliorer progressivement la qualité globale 
+de la solution Bewize.
