@@ -11,9 +11,9 @@ de chaque composant de la solution.
 Ce chapitre suit la logique de développement adoptée pendant le stage, 
 en présentant successivement : les technologies utilisées, la mise en 
 place de l'environnement de développement, le développement du formulaire 
-WebView en React JS, l'intégration dans l'application mobile React Native, 
-le développement du back-end Spring Boot, la mise en place de la base 
-de données PostgreSQL, et enfin le développement du dashboard monitor.
+WebView en React JS, le développement du back-end Spring Boot, la mise 
+en place de la base de données PostgreSQL, et enfin le développement 
+du dashboard monitor.
 
 %==========================================================
 \section{Technologies utilisées}
@@ -25,9 +25,7 @@ réclamations chez Bewize repose sur un ensemble de technologies modernes,
 complémentaires et éprouvées. Le choix de ces technologies a été guidé 
 par les contraintes de l'environnement existant chez Bewize, les bonnes 
 pratiques du développement logiciel moderne, et les exigences de 
-performance et de maintenabilité du projet. Chaque technologie a été 
-sélectionnée pour son adéquation avec les besoins spécifiques du projet 
-et sa complémentarité avec les autres technologies de la stack technique.
+performance et de maintenabilité du projet.
 
 \subsection{React JS}
 
@@ -38,28 +36,18 @@ et sa complémentarité avec les autres technologies de la stack technique.
     \label{fig:reactjs}
 \end{figure}
 
-React JS est une bibliothèque JavaScript open-source développée et 
-maintenue par Meta (anciennement Facebook), utilisée pour construire 
-des interfaces utilisateur web interactives, réactives et performantes. 
-Publiée en 2013, React JS a révolutionné le développement front-end 
-grâce à son approche innovante basée sur les composants réutilisables 
-et le DOM virtuel (Virtual DOM).
-
-Le principe fondamental de React JS repose sur la décomposition de 
-l'interface utilisateur en composants indépendants, réutilisables et 
-auto-suffisants. Chaque composant gère son propre état interne et peut 
-recevoir des données externes via des propriétés appelées props. Cette 
-architecture componentisée facilite considérablement la maintenance, 
-les tests et l'évolution de l'interface au fil du temps.
+La figure \ref{fig:reactjs} présente le logo de React JS, bibliothèque 
+JavaScript open-source développée et maintenue par Meta. React JS est 
+utilisée dans ce projet pour développer deux interfaces distinctes : 
+la page WebView contenant le formulaire de saisie, et le dashboard 
+monitor permettant à l'équipe Bewize de consulter et traiter les retours.
 
 \textbf{Utilisation dans le projet :}
 \begin{itemize}
     \item \textbf{La page WebView :} formulaire de saisie de feedback 
-    ou réclamation, accessible depuis l'application mobile via le 
-    composant WebView de React Native
+    ou réclamation, accessible depuis l'application mobile
     \item \textbf{Le dashboard monitor :} interface interne de 
-    consultation et traitement des retours utilisateurs, accessible 
-    par l'équipe Bewize
+    consultation et traitement des retours utilisateurs
 \end{itemize}
 
 \textbf{Avantages pour le projet :}
@@ -79,26 +67,11 @@ les tests et l'évolution de l'interface au fil du temps.
     \label{fig:react_native}
 \end{figure}
 
-React Native est un framework open-source développé par Meta permettant 
-de créer des applications mobiles natives pour iOS et Android à partir 
-d'un seul code source JavaScript. Il partage les mêmes concepts de base 
-que React JS mais génère des composants natifs réels plutôt que des 
-éléments HTML, offrant des performances proches d'une application native.
-
-\textbf{Utilisation dans le projet :}
-\begin{itemize}
-    \item Intégration du bouton feedback dans l'application mobile Bewize
-    \item Intégration du composant WebView pour afficher le formulaire
-    \item Gestion de la navigation entre les écrans de l'application
-\end{itemize}
-
-\textbf{Avantages pour le projet :}
-\begin{itemize}
-    \item Code unique pour iOS et Android
-    \item Performances natives pour une expérience fluide
-    \item Support natif du composant WebView
-    \item Hot Reload facilitant le développement
-\end{itemize}
+La figure \ref{fig:react_native} présente le logo de React Native, 
+framework open-source développé par Meta permettant de créer des 
+applications mobiles natives pour iOS et Android. Dans ce projet, 
+React Native constitue l'environnement dans lequel la page WebView 
+développée est intégrée par l'équipe Bewize.
 
 \subsection{Spring Boot}
 
@@ -109,12 +82,11 @@ que React JS mais génère des composants natifs réels plutôt que des
     \label{fig:spring_boot}
 \end{figure}
 
-Spring Boot est un framework Java open-source qui simplifie le 
-développement d'applications back-end et de microservices. Il adopte 
-le principe de \textit{convention over configuration}, fournissant 
-des configurations automatiques intelligentes qui permettent aux 
-développeurs de se concentrer sur la logique métier plutôt que sur 
-la configuration technique.
+La figure \ref{fig:spring_boot} présente le logo de Spring Boot, 
+framework Java open-source qui simplifie le développement d'applications 
+back-end et de microservices. Spring Boot est utilisé dans ce projet 
+pour développer l'ensemble du back-end de la solution, notamment les 
+APIs REST consommées par la WebView et le dashboard monitor.
 
 \textbf{Utilisation dans le projet :}
 \begin{itemize}
@@ -141,10 +113,10 @@ la configuration technique.
     \label{fig:nodejs}
 \end{figure}
 
-Node.js est un environnement d'exécution JavaScript côté serveur basé 
-sur le moteur V8 de Chrome. Il permet d'exécuter du JavaScript en dehors 
-du navigateur et constitue l'environnement indispensable pour React JS 
-et React Native.
+La figure \ref{fig:nodejs} présente le logo de Node.js, environnement 
+d'exécution JavaScript côté serveur basé sur le moteur V8 de Chrome. 
+Dans ce projet, Node.js est utilisé comme environnement d'exécution 
+pour React JS et pour la gestion des dépendances via npm.
 
 \textbf{Utilisation dans le projet :}
 \begin{itemize}
@@ -152,13 +124,6 @@ et React Native.
     \item Gestion des dépendances via npm
     \item Scripts de build et de déploiement front-end
     \item Serveur de développement local
-\end{itemize}
-
-\textbf{Avantages pour le projet :}
-\begin{itemize}
-    \item Léger et performant
-    \item Accès à l'écosystème npm
-    \item Compatibilité native avec React JS et React Native
 \end{itemize}
 
 \subsection{Docker}
@@ -170,10 +135,10 @@ et React Native.
     \label{fig:docker}
 \end{figure}
 
-Docker est une plateforme de conteneurisation permettant d'empaqueter 
-une application et toutes ses dépendances dans des conteneurs isolés 
-et portables, garantissant un comportement identique dans tous les 
-environnements d'exécution.
+La figure \ref{fig:docker} présente le logo de Docker, plateforme de 
+conteneurisation permettant d'empaqueter une application et toutes ses 
+dépendances dans des conteneurs isolés et portables. Docker garantit 
+un comportement identique dans tous les environnements d'exécution.
 
 \textbf{Utilisation dans le projet :}
 \begin{itemize}
@@ -181,13 +146,6 @@ environnements d'exécution.
     \item Conteneur pour la base de données PostgreSQL
     \item Conteneur pour la page WebView React JS
     \item \texttt{docker-compose.yml} pour orchestrer l'ensemble
-\end{itemize}
-
-\textbf{Avantages pour le projet :}
-\begin{itemize}
-    \item Cohérence entre développement, test et production
-    \item Isolation des services évitant les conflits
-    \item Déploiement simplifié et reproductible
 \end{itemize}
 
 \subsection{Git et GitHub}
@@ -199,10 +157,10 @@ environnements d'exécution.
     \label{fig:github}
 \end{figure}
 
-Git est le système de contrôle de version distribué le plus utilisé 
-au monde. GitHub est la plateforme web qui héberge les dépôts Git 
-et offre des fonctionnalités collaboratives avancées telles que les 
-pull requests, les issues et les pipelines CI/CD.
+La figure \ref{fig:github} présente le logo de Git et GitHub. Git est 
+le système de contrôle de version distribué le plus utilisé au monde, 
+tandis que GitHub est la plateforme web qui héberge les dépôts Git et 
+offre des fonctionnalités collaboratives avancées.
 
 \textbf{Utilisation dans le projet :}
 \begin{itemize}
@@ -210,13 +168,6 @@ pull requests, les issues et les pipelines CI/CD.
     \item Gestion des branches selon Gitflow Bewize
     \item Pull requests et code reviews avec le Tech Lead
     \item Intégration CI/CD pour les tests automatisés
-\end{itemize}
-
-\textbf{Avantages pour le projet :}
-\begin{itemize}
-    \item Traçabilité complète des modifications
-    \item Collaboration facilitée au sein de l'équipe
-    \item Standard déjà utilisé par Bewize
 \end{itemize}
 
 \subsection{PostgreSQL}
@@ -228,9 +179,11 @@ pull requests, les issues et les pipelines CI/CD.
     \label{fig:postgresql}
 \end{figure}
 
-PostgreSQL est un système de gestion de base de données relationnelle 
-open-source, reconnu pour sa robustesse, sa conformité ACID et ses 
-excellentes performances sur les requêtes complexes.
+La figure \ref{fig:postgresql} présente le logo de PostgreSQL, système 
+de gestion de base de données relationnelle open-source reconnu pour 
+sa robustesse et ses excellentes performances. PostgreSQL est utilisé 
+dans ce projet pour stocker l'ensemble des données liées aux feedbacks 
+et réclamations.
 
 \textbf{Utilisation dans le projet :}
 \begin{itemize}
@@ -239,18 +192,12 @@ excellentes performances sur les requêtes complexes.
     \item Requêtes de filtrage pour le dashboard monitor
 \end{itemize}
 
-\textbf{Avantages pour le projet :}
-\begin{itemize}
-    \item Fiabilité et intégrité des données garanties
-    \item Intégration native avec Spring Boot via JPA
-    \item Support Docker pour le déploiement
-    \item Open-source et gratuit
-\end{itemize}
-
 \subsection{Récapitulatif des technologies}
 
 \begin{table}[H]
 \centering
+\caption{Récapitulatif des technologies utilisées dans le projet}
+\label{tab:recap_technologies}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|p{3cm}|p{3cm}|p{6cm}|}
 \hline
@@ -258,7 +205,7 @@ excellentes performances sur les requêtes complexes.
 \hline
 React JS & Front-end web & Page WebView et dashboard monitor \\
 \hline
-React Native & Mobile & Application mobile et intégration WebView \\
+React Native & Mobile & Application mobile Bewize \\
 \hline
 Spring Boot & Back-end & APIs REST, logique métier, persistance \\
 \hline
@@ -271,9 +218,13 @@ Git / GitHub & Versioning & Contrôle de version et collaboration \\
 PostgreSQL & Base de données & Stockage des feedbacks et réclamations \\
 \hline
 \end{tabular}
-\caption{Récapitulatif des technologies utilisées}
-\label{tab:recap_technologies_miseenoeuvre}
 \end{table}
+
+Le tableau \ref{tab:recap_technologies} récapitule les sept technologies 
+utilisées dans ce projet, organisées par couche applicative. Cette stack 
+technique forme un ensemble cohérent et complémentaire, où chaque 
+technologie joue un rôle précis et justifié dans l'architecture globale 
+de la solution développée chez Bewize.
 
 %==========================================================
 \section{Mise en place de l'environnement de développement}
@@ -281,15 +232,12 @@ PostgreSQL & Base de données & Stockage des feedbacks et réclamations \\
 
 \subsection{Prérequis techniques}
 Avant de commencer le développement, il a été nécessaire de mettre en 
-place un environnement de développement complet et fonctionnel. Cette 
-étape, bien que préliminaire, est cruciale car elle conditionne l'ensemble 
-du travail de développement qui va suivre.
-
-Les outils et logiciels suivants ont été installés et configurés sur 
-le poste de développement :
+place un environnement de développement complet et fonctionnel.
 
 \begin{table}[H]
 \centering
+\caption{Environnement de développement — Outils et versions}
+\label{tab:env_dev}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|p{4cm}|p{3cm}|p{6cm}|}
 \hline
@@ -313,12 +261,13 @@ IntelliJ IDEA & Dernière version & IDE back-end Spring Boot \\
 \hline
 Postman & Dernière version & Test des APIs REST \\
 \hline
-pgAdmin & Dernière version & Administration PostgreSQL \\
-\hline
 \end{tabular}
-\caption{Environnement de développement}
-\label{tab:env_dev}
 \end{table}
+
+Le tableau \ref{tab:env_dev} présente les neuf outils installés et 
+configurés sur le poste de développement. Ces outils couvrent l'ensemble 
+des besoins du projet, depuis l'environnement d'exécution JavaScript 
+et Java jusqu'aux outils de test des APIs REST.
 
 \subsection{Configuration de Docker}
 L'ensemble des services de l'application a été conteneurisé avec Docker 
@@ -329,35 +278,42 @@ de données PostgreSQL et la page WebView React JS.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{Figures/docker_compose.png}
-    \caption{Configuration Docker Compose}
+    \includegraphics[width=0.88\textwidth]{Figures/docker_compose1.png}
+    \includegraphics[width=0.88\textwidth]{Figures/docker_compose2.png}
+    \caption{Configuration complète du fichier docker-compose.yml}
     \label{fig:docker_compose}
 \end{figure}
+
+La figure \ref{fig:docker_compose} illustre la configuration complète 
+du fichier \texttt{docker-compose.yml} utilisée pour orchestrer les 
+trois conteneurs du projet. Cette configuration définit les services, 
+les ports exposés, les variables d'environnement et les dépendances 
+entre conteneurs, garantissant un démarrage automatique et ordonné 
+de l'ensemble des services.
 
 \subsection{Initialisation du dépôt Git}
 Dès le début du projet, un dépôt Git a été initialisé sur GitHub 
 pour versionner l'ensemble du code source. La structure de branches 
-adoptée suit la méthodologie Gitflow utilisée par l'équipe Bewize :
+adoptée suit la méthodologie Gitflow :
 
 \begin{itemize}
-    \item \textbf{main :} branche principale contenant le code stable 
-    et validé, déployable en production
-    \item \textbf{develop :} branche de développement intégrant 
-    les fonctionnalités terminées
-    \item \textbf{feature/webview-form :} branche dédiée au 
-    développement du formulaire WebView
-    \item \textbf{feature/mobile-integration :} branche dédiée 
-    à l'intégration dans l'application mobile
-    \item \textbf{feature/dashboard :} branche dédiée au 
-    développement du dashboard monitor
+    \item \textbf{main :} branche principale contenant le code stable
+    \item \textbf{develop :} branche de développement
+    \item \textbf{feature/webview-form :} formulaire WebView
+    \item \textbf{feature/dashboard :} dashboard monitor
 \end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.88\textwidth]{Figures/git_branches.png}
-    \caption{Structure des branches Git du projet}
+    \caption{Structure des branches Git selon la méthodologie Gitflow}
     \label{fig:git_branches}
 \end{figure}
+
+La figure \ref{fig:git_branches} illustre la structure des branches Git 
+adoptée pour ce projet selon la méthodologie Gitflow. Les branches de 
+fonctionnalité ont été créées à partir de la branche develop et 
+fusionnées dans main lors des jalons de livraison.
 
 %==========================================================
 \section{Développement du formulaire WebView}
@@ -365,13 +321,8 @@ adoptée suit la méthodologie Gitflow utilisée par l'équipe Bewize :
 
 \subsection{Création du projet React JS}
 La première étape du développement a consisté à créer le projet React JS 
-qui hébergera le formulaire WebView. Ce projet a été initialisé en 
-utilisant Create React App, l'outil officiel de création de projets 
-React JS, qui configure automatiquement un environnement de développement 
-complet avec webpack, Babel et les outils de test.
-
-La structure du projet React JS a été organisée de manière claire et 
-maintenable, en séparant les composants, les services et les styles :
+qui hébergera le formulaire WebView. La structure du projet est organisée 
+comme suit :
 
 \begin{itemize}
     \item \textbf{src/components/ :} composants React JS réutilisables
@@ -381,152 +332,107 @@ maintenable, en séparant les composants, les services et les styles :
 \end{itemize}
 
 \subsection{Développement du composant formulaire}
-Le composant principal du formulaire WebView a été développé en React JS. 
-Il permet à l'utilisateur de saisir son feedback ou sa réclamation 
-de manière simple et intuitive. Le formulaire comprend les champs suivants :
+Le composant principal du formulaire WebView comprend les champs suivants :
 
 \begin{itemize}
-    \item \textbf{Type de retour :} un sélecteur permettant de choisir 
-    entre "Feedback" et "Réclamation"
-    \item \textbf{Message :} une zone de texte permettant à l'utilisateur 
-    de saisir son message de manière détaillée
-    \item \textbf{Bouton d'envoi :} un bouton clairement identifiable 
-    permettant de soumettre le formulaire
+    \item \textbf{Type de retour :} sélecteur entre "Feedback" et 
+    "Réclamation"
+    \item \textbf{Informations utilisateur :} prénom, nom, email, 
+    numéro étudiant et statut
+    \item \textbf{Détails de la réclamation :} type, objet, description 
+    et pièce jointe
+    \item \textbf{Bouton d'envoi :} bouton de soumission du formulaire
 \end{itemize}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Figures/webview_form.png}
-    \caption{Interface du formulaire WebView}
+    \includegraphics[width=0.6\textwidth]{Figures/webview_form_1.png}
+    \includegraphics[width=0.6\textwidth]{Figures/webview_form_2.png}
+    \caption{Interface complète du formulaire WebView de recueil de feedbacks}
     \label{fig:webview_form}
 \end{figure}
 
+La figure \ref{fig:webview_form} présente l'interface complète du 
+formulaire WebView développé en React JS. La partie supérieure affiche 
+les informations personnelles de l'utilisateur, tandis que la partie 
+inférieure présente les détails de la réclamation ainsi que le bouton 
+d'envoi. L'interface est épurée, intuitive et adaptée à un affichage 
+sur écran mobile.
+
 \subsection{Validation des données du formulaire}
-Une validation côté client a été implémentée pour s'assurer que les 
-données saisies par l'utilisateur sont correctes avant leur envoi 
-au back-end. Cette validation vérifie :
+Une validation côté client a été implémentée pour vérifier :
 
 \begin{itemize}
-    \item La présence obligatoire du type de retour (feedback ou réclamation)
-    \item La présence obligatoire du message avec une longueur minimale 
-    de dix caractères
-    \item La longueur maximale du message pour éviter les abus
+    \item La présence obligatoire de tous les champs requis
+    \item La présence obligatoire du message avec une longueur minimale
+    \item La longueur maximale du message
 \end{itemize}
-
-En cas de données invalides, des messages d'erreur clairs et précis 
-sont affichés directement sous les champs concernés, guidant l'utilisateur 
-vers une saisie correcte.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{Figures/webview_validation.png}
-    \caption{Validation des champs du formulaire}
+    \caption{Affichage des messages de validation du formulaire WebView}
     \label{fig:webview_validation}
 \end{figure}
 
+La figure \ref{fig:webview_validation} illustre le comportement du 
+formulaire en cas de soumission avec des champs invalides ou vides. 
+Des messages d'erreur explicites sont affichés en rouge directement 
+sous chaque champ concerné, guidant l'utilisateur vers une saisie 
+correcte et complète avant l'envoi.
+
 \subsection{Connexion à l'API Spring Boot}
 Une fois le formulaire validé, les données sont envoyées au back-end 
-Spring Boot via une requête HTTP POST. Cette communication est gérée 
-par un service dédié qui utilise l'API Fetch native de JavaScript 
-pour effectuer les appels HTTP de manière asynchrone.
-
-La réponse du back-end est traitée de manière appropriée :
-\begin{itemize}
-    \item En cas de succès (HTTP 200) : un message de confirmation 
-    est affiché à l'utilisateur et le formulaire est réinitialisé
-    \item En cas d'erreur réseau : un message d'erreur explicite 
-    est affiché invitant l'utilisateur à réessayer ultérieurement
-    \item En cas d'erreur serveur (HTTP 500) : un message d'erreur 
-    générique est affiché
-\end{itemize}
+Spring Boot via une requête HTTP POST.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{Figures/webview_confirmation.png}
-    \caption{Message de confirmation après envoi réussi}
+    \caption{Message de confirmation après l'envoi réussi du formulaire}
     \label{fig:webview_confirmation}
 \end{figure}
+
+La figure \ref{fig:webview_confirmation} présente le message de 
+confirmation affiché à l'utilisateur après l'envoi réussi de son 
+feedback ou de sa réclamation. Ce message inclut un numéro de référence 
+unique permettant de retrouver le retour dans le dashboard monitor, 
+ainsi que la date et l'heure d'envoi.
 
 %==========================================================
 \section{Développement du back-end Spring Boot}
 %==========================================================
 
 \subsection{Création du projet Spring Boot}
-Le projet Spring Boot a été créé en utilisant Spring Initializr, 
-l'outil officiel de génération de projets Spring Boot. Les dépendances 
-suivantes ont été sélectionnées lors de la création du projet :
+Le projet Spring Boot a été créé avec les dépendances suivantes :
 
 \begin{itemize}
     \item \textbf{Spring Web :} pour la création des APIs REST
     \item \textbf{Spring Data JPA :} pour la persistance des données
-    \item \textbf{PostgreSQL Driver :} pour la connexion à la base 
-    de données PostgreSQL
+    \item \textbf{PostgreSQL Driver :} pour la connexion à PostgreSQL
     \item \textbf{Spring Validation :} pour la validation des données
     \item \textbf{Lombok :} pour la réduction du code boilerplate
-    \item \textbf{SpringDoc OpenAPI :} pour la documentation 
-    automatique des APIs via Swagger
+    \item \textbf{SpringDoc OpenAPI :} pour la documentation Swagger
 \end{itemize}
 
 \subsection{Développement de l'entité Feedback}
-L'entité Feedback est la classe centrale du modèle de données. 
-Elle est annotée avec les annotations JPA nécessaires pour assurer 
-sa persistance dans la base de données PostgreSQL et contient 
-les attributs suivants :
+L'entité Feedback est la classe centrale du modèle avec les attributs :
 
 \begin{itemize}
-    \item \textbf{id :} identifiant unique auto-généré de type Long
-    \item \textbf{type :} énumération indiquant si c'est un FEEDBACK 
-    ou une RECLAMATION
-    \item \textbf{message :} contenu textuel du retour utilisateur
-    \item \textbf{dateEnvoi :} date et heure d'envoi générées 
-    automatiquement à la création
-    \item \textbf{statut :} énumération indiquant le statut de 
-    traitement (NOUVEAU, EN\_COURS, TRAITE)
-    \item \textbf{utilisateurId :} identifiant de l'utilisateur 
-    ayant soumis le retour
-\end{itemize}
-
-\subsection{Développement du Repository}
-Le FeedbackRepository est une interface Spring Data JPA qui étend 
-JpaRepository. Elle fournit automatiquement toutes les méthodes CRUD 
-standard (save, findById, findAll, delete) sans nécessiter d'implémentation 
-manuelle. Des méthodes de requête personnalisées ont également été 
-définies pour les besoins spécifiques du dashboard monitor :
-
-\begin{itemize}
-    \item Recherche par type (FEEDBACK ou RECLAMATION)
-    \item Recherche par statut de traitement
-    \item Recherche avec filtres combinés (type et statut)
-    \item Comptage par type pour les statistiques
-\end{itemize}
-
-\subsection{Développement du Service}
-Le FeedbackService implémente la logique métier de l'application. 
-Il constitue la couche intermédiaire entre le contrôleur et le 
-repository, garantissant une séparation claire des responsabilités :
-
-\begin{itemize}
-    \item \textbf{Création d'un feedback :} validation des données 
-    reçues, initialisation du statut à NOUVEAU et de la date d'envoi, 
-    puis sauvegarde via le repository
-    \item \textbf{Récupération des feedbacks :} application des filtres 
-    demandés par le dashboard et retour des résultats
-    \item \textbf{Mise à jour du statut :} vérification de la validité 
-    du nouveau statut et mise à jour en base de données
-    \item \textbf{Statistiques :} calcul des comptages par type et 
-    par statut pour le tableau de bord
+    \item \textbf{id :} identifiant unique auto-généré
+    \item \textbf{type :} FEEDBACK ou RECLAMATION
+    \item \textbf{message :} contenu textuel du retour
+    \item \textbf{dateEnvoi :} date et heure d'envoi
+    \item \textbf{statut :} NOUVEAU, EN\_COURS ou TRAITE
+    \item \textbf{utilisateurId :} identifiant de l'utilisateur
 \end{itemize}
 
 \subsection{Développement du Controller}
-Le FeedbackController expose les endpoints REST API consommés par 
-la WebView et le dashboard monitor. Il est annoté avec 
-\texttt{@RestController} et \texttt{@CrossOrigin} pour permettre 
-les appels depuis la WebView React JS.
-
-Les endpoints implémentés sont les suivants :
+Le FeedbackController expose les endpoints REST API suivants :
 
 \begin{table}[H]
 \centering
+\caption{Endpoints REST API implémentés dans le FeedbackController}
+\label{tab:endpoints}
 \renewcommand{\arraystretch}{1.8}
 \begin{tabular}{|p{1.8cm}|p{5cm}|p{2cm}|p{4cm}|}
 \hline
@@ -544,49 +450,23 @@ PUT & /api/feedbacks/\{id\}/statut & 200 OK & Mettre à jour le statut \\
 GET & /api/feedbacks/stats & 200 OK & Statistiques des retours \\
 \hline
 \end{tabular}
-\caption{Endpoints REST API implémentés}
-\label{tab:endpoints}
 \end{table}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{Figures/swagger.png}
-    \caption{Documentation Swagger des APIs REST}
-    \label{fig:swagger}
-\end{figure}
-
-\subsection{Gestion des erreurs}
-Un gestionnaire d'exceptions global a été mis en place via 
-\texttt{@ControllerAdvice} pour intercepter et traiter de manière 
-uniforme toutes les exceptions levées par l'application :
-
-\begin{itemize}
-    \item \textbf{ResourceNotFoundException :} retourne HTTP 404 
-    lorsqu'un feedback ou réclamation n'est pas trouvé
-    \item \textbf{ValidationException :} retourne HTTP 400 avec 
-    les détails des erreurs de validation
-    \item \textbf{Exception générale :} retourne HTTP 500 avec 
-    un message d'erreur générique
-\end{itemize}
+Le tableau \ref{tab:endpoints} présente les cinq endpoints REST API 
+développés dans le FeedbackController. L'endpoint POST retourne un 
+code HTTP 201 lors de la création réussie d'un retour, tandis que 
+les endpoints GET et PUT retournent un code HTTP 200.
 
 %==========================================================
 \section{Configuration de la base de données PostgreSQL}
 %==========================================================
 
-\subsection{Création de la base de données}
-La base de données PostgreSQL a été créée et configurée pour stocker 
-les données de feedbacks et réclamations. La connexion à la base de 
-données est configurée dans le fichier \texttt{application.properties} 
-du projet Spring Boot, définissant l'URL de connexion, le nom 
-d'utilisateur, le mot de passe et les paramètres JPA.
-
 \subsection{Création des tables}
-Spring Data JPA génère automatiquement la structure des tables en 
-base de données à partir des entités Java annotées. La table principale 
-\texttt{feedback} a été créée avec la structure suivante :
 
 \begin{table}[H]
 \centering
+\caption{Structure de la table feedback dans PostgreSQL}
+\label{tab:table_feedback}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|p{3.5cm}|p{3cm}|p{2.5cm}|p{4cm}|}
 \hline
@@ -606,215 +486,104 @@ statut & VARCHAR(20) & NOT NULL & NOUVEAU, EN\_COURS, TRAITE \\
 utilisateur\_id & BIGINT & NOT NULL & Identifiant utilisateur \\
 \hline
 \end{tabular}
-\caption{Structure de la table feedback en PostgreSQL}
-\label{tab:table_feedback}
 \end{table}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.88\textwidth]{Figures/pgadmin.png}
-    \caption{Structure de la base de données dans pgAdmin}
-    \label{fig:pgadmin}
-\end{figure}
-
-%==========================================================
-\section{Intégration dans l'application mobile React Native}
-%==========================================================
-
-\subsection{Ajout du bouton feedback}
-L'intégration dans l'application mobile React Native a consisté à 
-ajouter un bouton dédié dans l'interface existante de l'application 
-Bewize. Ce bouton a été intégré de manière cohérente avec l'identité 
-visuelle de l'application, en respectant la charte graphique et 
-les composants UI existants.
-
-Le bouton est clairement identifiable par l'utilisateur et accessible 
-depuis l'écran principal de l'application. Il affiche une icône 
-représentative accompagnée d'un libellé explicite pour guider 
-l'utilisateur.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\textwidth]{Figures/mobile_button.png}
-    \caption{Bouton feedback intégré dans l'application mobile}
-    \label{fig:mobile_button}
-\end{figure}
-
-\subsection{Intégration du composant WebView}
-Le composant WebView de React Native a été utilisé pour afficher 
-le formulaire directement dans l'application mobile, sans rediriger 
-l'utilisateur vers un navigateur externe. Cette approche offre une 
-expérience utilisateur fluide et cohérente.
-
-La WebView est configurée pour :
-\begin{itemize}
-    \item Charger l'URL de la page WebView React JS
-    \item Activer JavaScript pour le bon fonctionnement du formulaire
-    \item Gérer les erreurs de chargement avec un message adapté
-    \item Afficher un indicateur de chargement pendant le chargement 
-    de la page
-    \item Permettre le retour à l'écran précédent après l'envoi 
-    du formulaire
-\end{itemize}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\textwidth]{Figures/mobile_webview.png}
-    \caption{Formulaire WebView affiché dans l'application mobile}
-    \label{fig:mobile_webview}
-\end{figure}
-
-\subsection{Gestion de la navigation}
-La navigation entre l'écran principal de l'application et la WebView 
-a été gérée en utilisant React Navigation, la bibliothèque de navigation 
-standard pour React Native. L'utilisateur peut accéder à la WebView 
-en cliquant sur le bouton feedback, et retourner à l'écran précédent 
-en utilisant le bouton retour natif de son smartphone ou le bouton 
-de fermeture intégré dans la WebView.
+Le tableau \ref{tab:table_feedback} décrit la structure de la table 
+\texttt{feedback} créée automatiquement par Spring Data JPA dans la 
+base de données PostgreSQL. Cette table comporte six colonnes permettant 
+de stocker toutes les informations nécessaires à la gestion des retours 
+utilisateurs, depuis leur création jusqu'à leur traitement complet 
+par l'équipe Bewize.
 
 %==========================================================
 \section{Développement du dashboard monitor}
 %==========================================================
 
 \subsection{Présentation du dashboard}
-Le dashboard monitor est une interface web interne développée en 
-React JS, accessible exclusivement par l'équipe interne de Bewize. 
-Il constitue le point central de consultation et de traitement 
-des feedbacks et réclamations reçus des utilisateurs de l'application 
-mobile.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{Figures/dashboard_home.png}
-    \caption{Page d'accueil du dashboard monitor}
+    \caption{Page d'accueil du dashboard monitor Bewize}
     \label{fig:dashboard_home}
 \end{figure}
 
-\subsection{Page liste des retours}
-La page principale du dashboard affiche la liste complète de tous 
-les feedbacks et réclamations reçus, sous forme de tableau paginé. 
-Chaque ligne du tableau affiche les informations essentielles :
+La figure \ref{fig:dashboard_home} présente la page d'accueil du 
+dashboard monitor développé en React JS. Cette interface affiche 
+quatre indicateurs clés en temps réel : le nombre total de retours 
+reçus, le nombre de réclamations, le nombre de retours en attente 
+de traitement et le taux de traitement global.
 
-\begin{itemize}
-    \item L'identifiant unique du retour
-    \item Le type (feedback ou réclamation) avec un badge coloré distinctif
-    \item Un extrait du message pour une lecture rapide
-    \item La date d'envoi formatée
-    \item Le statut de traitement avec un indicateur visuel coloré
-    \item Des boutons d'action pour consulter le détail ou changer 
-    le statut directement depuis la liste
-\end{itemize}
+\subsection{Page liste des retours}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{Figures/dashboard_list.png}
-    \caption{Page liste des feedbacks et réclamations}
+    \caption{Page liste des feedbacks et réclamations dans le dashboard}
     \label{fig:dashboard_list}
 \end{figure}
 
-\subsection{Fonctionnalité de filtrage}
-Une fonctionnalité de filtrage avancée a été implémentée pour permettre 
-à l'équipe Bewize de trier et filtrer rapidement les retours selon 
-plusieurs critères :
+La figure \ref{fig:dashboard_list} présente la page de liste complète 
+des feedbacks et réclamations reçus. Chaque retour est affiché sous 
+forme de ligne dans un tableau paginé, avec son identifiant, son type, 
+son objet, l'utilisateur émetteur, la date d'envoi et le statut de 
+traitement.
 
-\begin{itemize}
-    \item \textbf{Filtre par type :} afficher uniquement les feedbacks 
-    ou uniquement les réclamations
-    \item \textbf{Filtre par statut :} afficher uniquement les retours 
-    NOUVEAU, EN\_COURS ou TRAITE
-    \item \textbf{Filtre par date :} sélectionner une plage de dates 
-    pour afficher les retours d'une période spécifique
-    \item \textbf{Recherche textuelle :} rechercher dans le contenu 
-    des messages par mots-clés
-\end{itemize}
+\subsection{Fonctionnalité de filtrage}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{Figures/dashboard_filter.png}
-    \caption{Fonctionnalité de filtrage du dashboard}
+    \caption{Fonctionnalité de filtrage des retours dans le dashboard}
     \label{fig:dashboard_filter}
 \end{figure}
 
-\subsection{Page détail d'un retour}
-La page de détail affiche l'intégralité des informations d'un feedback 
-ou d'une réclamation sélectionné. Elle présente le message complet 
-de l'utilisateur, toutes les métadonnées associées et le statut 
-de traitement actuel avec la possibilité de le modifier.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{Figures/dashboard_detail.png}
-    \caption{Page détail d'un retour utilisateur}
-    \label{fig:dashboard_detail}
-\end{figure}
-
-\subsection{Gestion du statut de traitement}
-Un système de statuts progressifs a été implémenté :
-
-\begin{itemize}
-    \item \textbf{NOUVEAU (rouge) :} retour reçu et non encore traité, 
-    statut initial attribué automatiquement
-    \item \textbf{EN\_COURS (orange) :} retour en cours de traitement 
-    par un membre de l'équipe Bewize
-    \item \textbf{TRAITE (vert) :} retour entièrement traité et clôturé
-\end{itemize}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.88\textwidth]{Figures/dashboard_statut.png}
-    \caption{Gestion du statut de traitement}
-    \label{fig:dashboard_statut}
-\end{figure}
+La figure \ref{fig:dashboard_filter} illustre la fonctionnalité de 
+filtrage avancé du dashboard monitor. Des boutons de filtre rapide 
+permettent à l'équipe de basculer entre tous les retours, uniquement 
+les feedbacks ou uniquement les réclamations, ainsi que de filtrer 
+par statut.
 
 \subsection{Tableau de bord statistiques}
-Un tableau de bord statistiques offre à l'équipe Bewize une vue 
-synthétique des retours reçus. Il affiche :
-
-\begin{itemize}
-    \item Le nombre total de feedbacks et réclamations reçus
-    \item La répartition par type (feedbacks vs réclamations)
-    \item La répartition par statut (nouveau, en cours, traité)
-    \item L'évolution du nombre de retours dans le temps
-\end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{Figures/dashboard_stats.png}
-    \caption{Tableau de bord statistiques}
+    \caption{Tableau de bord statistiques du dashboard monitor}
     \label{fig:dashboard_stats}
 \end{figure}
+
+La figure \ref{fig:dashboard_stats} présente le tableau de bord 
+statistiques du dashboard monitor. Cette vue synthétique affiche la 
+répartition des retours par type sous forme de graphique en donut, 
+la répartition par statut sous forme de barres horizontales, et 
+l'évolution du nombre de retours par semaine.
 
 %==========================================================
 \section{Tests de l'application}
 %==========================================================
 
 \subsection{Tests de l'API avec Postman}
-L'ensemble des endpoints REST API développés ont été testés de manière 
-exhaustive avec Postman avant leur intégration dans les interfaces 
-front-end. Pour chaque endpoint, les cas suivants ont été testés :
-
-\begin{itemize}
-    \item Le cas nominal avec des données valides
-    \item Les cas limites avec des données aux valeurs extrêmes
-    \item Les cas d'erreur avec des données invalides ou manquantes
-    \item La gestion des erreurs réseau et serveur
-\end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{Figures/postman_test.png}
-    \caption{Tests des APIs avec Postman}
+    \caption{Tests des APIs REST avec Postman}
     \label{fig:postman_test}
 \end{figure}
 
+La figure \ref{fig:postman_test} illustre l'environnement de test 
+Postman utilisé pour valider les APIs REST du projet. Chaque endpoint 
+a été testé avec plusieurs scénarios : le cas nominal avec des données 
+valides, les cas limites et les cas d'erreur avec des données invalides 
+ou manquantes.
+
 \subsection{Tests fonctionnels bout en bout}
-Des tests fonctionnels complets ont été réalisés pour valider le 
-parcours utilisateur de bout en bout, depuis le clic sur le bouton 
-feedback dans l'application mobile jusqu'à l'affichage dans le 
-dashboard monitor.
 
 \begin{table}[H]
 \centering
+\caption{Résultats des tests fonctionnels bout en bout}
+\label{tab:tests}
 \renewcommand{\arraystretch}{1.8}
 \begin{tabular}{|c|p{5cm}|p{3cm}|p{3cm}|}
 \hline
@@ -842,13 +611,14 @@ Statut mis à jour en base et affiché & Conforme \\
 T07 & Affichage des statistiques & 
 Données calculées et affichées & Conforme \\
 \hline
-T08 & Test de la WebView sur mobile & 
-Formulaire affiché et fonctionnel & Conforme \\
-\hline
 \end{tabular}
-\caption{Résultats des tests fonctionnels}
-\label{tab:tests}
 \end{table}
+
+Le tableau \ref{tab:tests} présente les résultats des sept tests 
+fonctionnels bout en bout réalisés. Ces tests couvrent l'ensemble 
+du parcours utilisateur, depuis l'envoi d'un retour depuis la WebView 
+jusqu'à sa consultation et son traitement dans le dashboard monitor. 
+Tous les tests ont été réalisés avec succès.
 
 %==========================================================
 \section{Conclusion}
@@ -861,13 +631,8 @@ l'ensemble des composants de la solution : les technologies utilisées,
 le formulaire WebView React JS, le back-end Spring Boot avec ses APIs 
 REST, la base de données PostgreSQL et le dashboard monitor.
 
-Chaque composant a été développé en suivant les bonnes pratiques 
-du développement logiciel moderne, avec une attention particulière 
-portée à la qualité du code, à la validation des données et à la 
-gestion des erreurs. Les tests fonctionnels réalisés ont confirmé 
-le bon fonctionnement du parcours complet, de la saisie du retour 
-par l'utilisateur mobile jusqu'à sa consultation et son traitement 
-par l'équipe interne Bewize dans le dashboard monitor.
-
-Le chapitre suivant présentera les résultats obtenus et une évaluation 
-globale de la solution développée.
+Chaque composant a été développé en suivant les bonnes pratiques du 
+développement logiciel moderne, avec une attention particulière portée 
+à la qualité du code, à la validation des données et à la gestion des 
+erreurs. Le chapitre suivant présentera les résultats des tests 
+réalisés et une évaluation globale de la solution développée.
