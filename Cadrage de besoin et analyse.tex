@@ -1,64 +1,59 @@
 \chapter{Cadrage de besoin et analyse}
 
 \section{Introduction}
-Dans le cadre du stage de Lamyaa Lamssaoui au sein de l'entreprise Bewize, 
-le projet s'inscrit dans une démarche d'amélioration continue de l'expérience 
-utilisateur de l'application mobile Bewize. En effet, toute application mobile 
-moderne se doit d'intégrer un mécanisme permettant à ses utilisateurs de 
-communiquer facilement leurs retours, qu'il s'agisse de feedbacks positifs ou 
-de réclamations. C'est dans ce contexte que s'inscrit le développement de la 
-fonctionnalité de recueil de feedbacks et de réclamations.
-
-Ce chapitre présente le cadrage complet du projet, en commençant par une 
-analyse approfondie du contexte et des besoins, puis en décrivant l'étude de 
-l'existant et enfin la solution proposée pour répondre aux attentes de Bewize 
-et de ses utilisateurs.
+Ce chapitre a pour objectif de présenter le cadrage complet du projet 
+développé dans le cadre du stage chez Bewize. Il commence par une analyse 
+approfondie du contexte et des besoins, puis décrit l'étude de l'existant 
+et enfin la solution proposée pour répondre aux attentes de Bewize et 
+de ses utilisateurs. Ce cadrage constitue la base indispensable pour 
+aborder sereinement les phases de conception et de développement 
+présentées dans les chapitres suivants.
 
 %----------------------------------------------------------
 \section{Contexte du projet}
 %----------------------------------------------------------
 
 \subsection{Présentation du besoin métier}
-Bewize est une entreprise proposant une application mobile destinée à ses 
-utilisateurs. Dans le cadre de son développement, Bewize souhaite améliorer 
-le suivi des retours de ses utilisateurs. Aujourd'hui, aucun mécanisme simple 
-et intégré ne permet aux utilisateurs de transmettre directement leurs feedbacks 
-ou réclamations depuis l'application mobile.
+Bewize est une entreprise proposant une application mobile destinée à 
+ses utilisateurs. Dans le cadre de son développement, Bewize souhaite 
+améliorer le suivi des retours de ses utilisateurs. Aujourd'hui, aucun 
+mécanisme simple et intégré ne permet aux utilisateurs de transmettre 
+directement leurs feedbacks ou réclamations depuis l'application mobile.
 
-Cette absence de canal de communication directe entre les utilisateurs et 
-l'équipe Bewize représente un manque important. Les utilisateurs insatisfaits 
-n'ont pas de moyen simple pour signaler un problème, et l'équipe interne ne 
-dispose pas d'une vue centralisée des retours utilisateurs. Cela peut entraîner 
-une dégradation progressive de la satisfaction client et une perte d'informations 
-précieuses pour l'amélioration du produit.
+Cette absence de canal de communication directe entre les utilisateurs 
+et l'équipe Bewize représente un manque important. Les utilisateurs 
+insatisfaits n'ont pas de moyen simple pour signaler un problème, et 
+l'équipe interne ne dispose pas d'une vue centralisée des retours 
+utilisateurs. Cela peut entraîner une dégradation progressive de la 
+satisfaction client et une perte d'informations précieuses pour 
+l'amélioration du produit.
 
 \subsection{Enjeux du projet}
 Les enjeux de ce projet sont multiples et touchent à la fois à la qualité 
-du produit, à la satisfaction client et à l'efficacité opérationnelle de 
-l'équipe Bewize :
+du produit, à la satisfaction client et à l'efficacité opérationnelle 
+de l'équipe Bewize :
 
 \begin{itemize}
-    \item \textbf{Enjeu produit :} Améliorer la qualité de l'application mobile 
-    en collectant les retours directs des utilisateurs et en les intégrant dans 
-    le processus d'amélioration continue.
+    \item \textbf{Enjeu produit :} améliorer la qualité de l'application 
+    mobile en collectant les retours directs des utilisateurs et en les 
+    intégrant dans le processus d'amélioration continue.
     
-    \item \textbf{Enjeu satisfaction client :} Offrir aux utilisateurs un canal 
-    simple, rapide et accessible pour exprimer leurs feedbacks ou réclamations, 
-    renforçant ainsi leur sentiment d'être écoutés et pris en compte.
+    \item \textbf{Enjeu satisfaction client :} offrir aux utilisateurs 
+    un canal simple, rapide et accessible pour exprimer leurs feedbacks 
+    ou réclamations, renforçant ainsi leur sentiment d'être écoutés.
     
-    \item \textbf{Enjeu opérationnel :} Centraliser les retours utilisateurs dans 
-    le dashboard monitor interne afin de faciliter leur traitement par l'équipe 
-    Bewize et d'optimiser les délais de réponse.
+    \item \textbf{Enjeu opérationnel :} centraliser les retours 
+    utilisateurs dans le dashboard monitor interne afin de faciliter 
+    leur traitement par l'équipe Bewize.
     
-    \item \textbf{Enjeu technique :} Intégrer cette nouvelle fonctionnalité de 
-    manière cohérente avec l'architecture existante de Bewize, en utilisant 
-    les technologies déjà en place (Spring Boot, React JS, base de données Bewize).
+    \item \textbf{Enjeu technique :} intégrer cette nouvelle fonctionnalité 
+    de manière cohérente avec l'architecture existante de Bewize.
 \end{itemize}
 
 \subsection{Périmètre du projet}
-Le projet est encadré par le Product Manager de Bewize, en collaboration avec 
-le Tech Lead et l'équipe de développement. Il s'inscrit dans un stage de deux 
-mois et couvre les phases suivantes :
+Le projet est encadré par le Product Manager de Bewize, en collaboration 
+avec le Tech Lead et l'équipe de développement. Il s'inscrit dans un 
+stage de deux mois et couvre les phases suivantes :
 
 \begin{enumerate}
     \item Immersion agile et formation Scrum
@@ -72,164 +67,180 @@ mois et couvre les phases suivantes :
 %----------------------------------------------------------
 
 \subsection{Besoins fonctionnels}
-Les besoins fonctionnels décrivent l'ensemble des fonctionnalités que le système 
-doit offrir pour répondre aux attentes des utilisateurs et de l'équipe Bewize. 
-Après une analyse approfondie du contexte et des attentes métier, les besoins 
-fonctionnels suivants ont été identifiés :
+Les besoins fonctionnels décrivent l'ensemble des fonctionnalités que 
+le système doit offrir pour répondre aux attentes des utilisateurs et 
+de l'équipe Bewize. Après une analyse approfondie du contexte et des 
+attentes métier, les besoins fonctionnels suivants ont été identifiés :
 
 \begin{table}[H]
 \centering
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{|c|p{4cm}|p{7cm}|}
-\hline
-\textbf{ID} & \textbf{Besoin} & \textbf{Description} \\
-\hline
-BF01 & Accès à la fonctionnalité & L'utilisateur doit pouvoir accéder facilement 
-à la fonctionnalité de feedback depuis l'application mobile via un bouton dédié. \\
-\hline
-BF02 & Redirection WebView & L'utilisateur est redirigé vers une page WebView 
-simple et claire après avoir cliqué sur le bouton. \\
-\hline
-BF03 & Formulaire de saisie & L'utilisateur peut saisir son message de feedback 
-ou de réclamation dans un formulaire simple et intuitif. \\
-\hline
-BF04 & Envoi des données & Les données saisies par l'utilisateur sont envoyées 
-via API au back-end Bewize. \\
-\hline
-BF05 & Enregistrement & Les informations sont enregistrées dans la base de 
-données Bewize pour consultation ultérieure. \\
-\hline
-BF06 & Consultation dashboard & L'équipe interne Bewize peut consulter les 
-feedbacks et réclamations reçus depuis le dashboard monitor. \\
-\hline
-BF07 & Centralisation & Toutes les données utilisateurs et réclamations sont 
-centralisées dans un seul espace accessible à l'équipe. \\
-\hline
-\end{tabular}
 \caption{Tableau des besoins fonctionnels}
 \label{tab:besoins_fonctionnels}
-\end{table}
-
-\subsection{Besoins non fonctionnels}
-Les besoins non fonctionnels définissent les contraintes de qualité, de 
-performance et de sécurité que le système doit respecter :
-
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5}
+\renewcommand{\arraystretch}{1.8}
 \begin{tabular}{|c|p{4cm}|p{7cm}|}
 \hline
 \textbf{ID} & \textbf{Besoin} & \textbf{Description} \\
 \hline
-BNF01 & Performance & La page WebView doit se charger rapidement pour ne pas 
-nuire à l'expérience utilisateur. \\
+BF01 & Accès à la fonctionnalité & L'utilisateur doit pouvoir accéder 
+facilement à la fonctionnalité de feedback depuis l'application mobile 
+via un bouton dédié. \\
 \hline
-BNF02 & Simplicité & L'interface doit être simple, claire et intuitive pour 
-tout type d'utilisateur. \\
+BF02 & Redirection WebView & L'utilisateur est redirigé vers une page 
+WebView simple et claire après avoir cliqué sur le bouton. \\
+\hline
+BF03 & Formulaire de saisie & L'utilisateur peut saisir son message de 
+feedback ou de réclamation dans un formulaire simple et intuitif. \\
+\hline
+BF04 & Envoi des données & Les données saisies par l'utilisateur sont 
+envoyées via API au back-end Bewize. \\
+\hline
+BF05 & Enregistrement & Les informations sont enregistrées dans la base 
+de données Bewize pour consultation ultérieure. \\
+\hline
+BF06 & Consultation dashboard & L'équipe interne Bewize peut consulter 
+les feedbacks et réclamations reçus depuis le dashboard monitor. \\
+\hline
+BF07 & Centralisation & Toutes les données utilisateurs et réclamations 
+sont centralisées dans un seul espace accessible à l'équipe. \\
+\hline
+\end{tabular}
+\end{table}
+
+Le tableau \ref{tab:besoins_fonctionnels} présente les sept besoins 
+fonctionnels identifiés lors de la phase d'analyse. Ces besoins couvrent 
+l'ensemble du parcours utilisateur, depuis l'accès à la fonctionnalité 
+depuis l'application mobile jusqu'à la consultation des retours par 
+l'équipe interne Bewize dans le dashboard monitor.
+
+\subsection{Besoins non fonctionnels}
+Les besoins non fonctionnels définissent les contraintes de qualité, 
+de performance et de sécurité que le système doit respecter pour 
+garantir une expérience utilisateur optimale et une solution fiable :
+
+\begin{table}[H]
+\centering
+\caption{Tableau des besoins non fonctionnels}
+\label{tab:besoins_non_fonctionnels}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|c|p{4cm}|p{7cm}|}
+\hline
+\textbf{ID} & \textbf{Besoin} & \textbf{Description} \\
+\hline
+BNF01 & Performance & La page WebView doit se charger rapidement pour 
+ne pas nuire à l'expérience utilisateur. \\
+\hline
+BNF02 & Simplicité & L'interface doit être simple, claire et intuitive 
+pour tout type d'utilisateur. \\
 \hline
 BNF03 & Fiabilité & Les données envoyées par l'utilisateur doivent être 
 transmises de manière fiable sans perte d'information. \\
 \hline
-BNF04 & Sécurité & Les données personnelles des utilisateurs doivent être 
-protégées et traitées de manière sécurisée. \\
+BNF04 & Sécurité & Les données personnelles des utilisateurs doivent 
+être protégées et traitées de manière sécurisée. \\
 \hline
-BNF05 & Compatibilité & La solution doit être compatible avec l'application 
-mobile Bewize existante et son architecture technique. \\
+BNF05 & Compatibilité & La solution doit être compatible avec 
+l'application mobile Bewize existante et son architecture technique. \\
 \hline
-BNF06 & Maintenabilité & Le code développé doit être propre, documenté et 
-facile à maintenir par l'équipe de développement Bewize. \\
+BNF06 & Maintenabilité & Le code développé doit être propre, documenté 
+et facile à maintenir par l'équipe de développement Bewize. \\
 \hline
 \end{tabular}
-\caption{Tableau des besoins non fonctionnels}
-\label{tab:besoins_non_fonctionnels}
 \end{table}
+
+Le tableau \ref{tab:besoins_non_fonctionnels} récapitule les six besoins 
+non fonctionnels retenus pour ce projet. Ces contraintes de qualité 
+sont essentielles pour garantir que la solution développée soit non 
+seulement fonctionnelle, mais également performante, sécurisée et 
+maintenable sur le long terme.
 
 %----------------------------------------------------------
 \section{Étude de l'existant}
 %----------------------------------------------------------
 
 \subsection{Présentation de l'existant}
-Avant de concevoir la solution, il est essentiel d'analyser l'existant afin 
-de comprendre le contexte technique dans lequel la fonctionnalité va s'intégrer. 
-Bewize dispose déjà d'un écosystème technique composé de plusieurs éléments :
+Avant de concevoir la solution, il est essentiel d'analyser l'existant 
+afin de comprendre le contexte technique dans lequel la fonctionnalité 
+va s'intégrer. Bewize dispose déjà d'un écosystème technique composé 
+de plusieurs éléments interdépendants :
 
 \begin{itemize}
-    \item \textbf{Application mobile Bewize :} L'application mobile est déjà 
-    développée et utilisée par les utilisateurs finaux. Elle constitue le point 
-    d'entrée principal de la nouvelle fonctionnalité.
+    \item \textbf{Application mobile Bewize :} l'application mobile est 
+    déjà développée et utilisée par les utilisateurs finaux. Elle 
+    constitue le point d'entrée principal de la nouvelle fonctionnalité.
     
-    \item \textbf{Dashboard monitor interne :} Il s'agit d'une interface web 
-    développée en interne par Bewize, permettant à l'équipe de gérer et consulter 
-    les données liées aux utilisateurs de l'application mobile. Ce dashboard 
-    sera enrichi pour afficher les feedbacks et réclamations collectés.
+    \item \textbf{Dashboard monitor interne :} interface web développée 
+    en interne par Bewize, permettant à l'équipe de gérer et consulter 
+    les données liées aux utilisateurs. Ce dashboard sera enrichi pour 
+    afficher les feedbacks et réclamations collectés.
     
-    \item \textbf{APIs Spring Boot :} Bewize utilise déjà des APIs développées 
-    avec le framework Spring Boot pour la communication entre les différentes 
-    parties de son système. La nouvelle fonctionnalité s'appuiera sur ces APIs 
-    existantes tout en en créant de nouvelles.
+    \item \textbf{APIs Spring Boot :} Bewize utilise déjà des APIs 
+    développées avec Spring Boot pour la communication entre les 
+    différentes parties de son système.
     
-    \item \textbf{Base de données Bewize :} Une base de données centralisée 
-    existe déjà au sein de Bewize pour stocker les données utilisateurs et 
-    applicatives. Les nouvelles données de feedbacks et réclamations y seront 
-    intégrées.
+    \item \textbf{Base de données Bewize :} une base de données 
+    centralisée existe déjà pour stocker les données utilisateurs 
+    et applicatives.
 \end{itemize}
 
 \subsection{Limites de l'existant}
-Malgré cet écosystème technique déjà en place, plusieurs limites ont été 
-identifiées :
+Malgré cet écosystème technique déjà en place, plusieurs limites ont 
+été identifiées lors de la phase d'analyse :
 
 \begin{itemize}
     \item Absence de canal direct de communication entre les utilisateurs 
     et l'équipe Bewize depuis l'application mobile.
-    \item Aucun mécanisme de collecte structurée des feedbacks et réclamations 
-    n'est intégré à l'application mobile.
-    \item L'équipe interne ne dispose pas d'une vue centralisée et organisée 
-    des retours utilisateurs.
-    \item Le traitement des réclamations est actuellement manuel et non 
-    systématisé.
+    \item Aucun mécanisme de collecte structurée des feedbacks et 
+    réclamations n'est intégré à l'application mobile.
+    \item L'équipe interne ne dispose pas d'une vue centralisée et 
+    organisée des retours utilisateurs.
+    \item Le traitement des réclamations est actuellement manuel et 
+    non systématisé.
 \end{itemize}
 
-Ces limites justifient pleinement le développement de la nouvelle fonctionnalité 
-et démontrent la valeur ajoutée qu'elle apportera à l'écosystème Bewize.
+Ces limites justifient pleinement le développement de la nouvelle 
+fonctionnalité et démontrent la valeur ajoutée qu'elle apportera 
+à l'écosystème Bewize.
 
 %----------------------------------------------------------
 \section{Solution proposée}
 %----------------------------------------------------------
 
 \subsection{Description de la solution}
-La solution proposée consiste à développer une fonctionnalité complète de 
-recueil de feedbacks et de réclamations, intégrée directement dans l'application 
-mobile Bewize. Cette solution repose sur l'utilisation d'une page WebView 
-accessible depuis l'application mobile, communiquant avec le back-end via des 
-APIs Spring Boot, et dont les données sont visualisées dans le dashboard monitor.
+La solution proposée consiste à développer une fonctionnalité complète 
+de recueil de feedbacks et de réclamations, intégrée directement dans 
+l'application mobile Bewize. Cette solution repose sur l'utilisation 
+d'une page WebView accessible depuis l'application mobile, communiquant 
+avec le back-end via des APIs Spring Boot, et dont les données sont 
+visualisées dans le dashboard monitor.
 
 \subsection{Parcours utilisateur}
-Le parcours utilisateur a été conçu pour être le plus simple et fluide possible. 
-Il se déroule en sept étapes :
+Le parcours utilisateur a été conçu pour être le plus simple et fluide 
+possible. Il se déroule en sept étapes :
 
 \begin{enumerate}
-    \item L'utilisateur ouvre l'application mobile Bewize et navigue jusqu'au 
-    bouton de feedback ou réclamation.
-    \item Il clique sur ce bouton dédié, clairement identifiable dans l'interface.
-    \item Une page WebView s'ouvre automatiquement, affichant un formulaire 
-    simple et clair.
-    \item L'utilisateur remplit le formulaire en saisissant son message de 
-    feedback ou de réclamation ainsi que les informations nécessaires.
+    \item L'utilisateur ouvre l'application mobile Bewize et navigue 
+    jusqu'au bouton de feedback ou réclamation.
+    \item Il clique sur ce bouton dédié, clairement identifiable 
+    dans l'interface.
+    \item Une page WebView s'ouvre automatiquement, affichant un 
+    formulaire simple et clair.
+    \item L'utilisateur remplit le formulaire en saisissant son message 
+    ainsi que les informations nécessaires.
     \item Il soumet le formulaire en cliquant sur le bouton d'envoi.
-    \item Les données sont transmises via API au back-end Spring Boot, qui les 
-    traite et les enregistre dans la base de données Bewize.
-    \item L'équipe interne Bewize consulte les feedbacks et réclamations reçus 
+    \item Les données sont transmises via API au back-end Spring Boot, 
+    qui les traite et les enregistre dans la base de données Bewize.
+    \item L'équipe interne Bewize consulte les feedbacks et réclamations 
     depuis le dashboard monitor et procède à leur traitement.
 \end{enumerate}
 
 \subsection{Fonctionnalités détaillées}
-La fonctionnalité développée dans le cadre de ce stage couvre les aspects 
-suivants :
+La fonctionnalité développée dans le cadre de ce stage couvre les 
+aspects suivants, organisés par composant :
 
 \begin{itemize}
     \item \textbf{Côté application mobile :}
     \begin{itemize}
-        \item Ajout d'un bouton d'accès au feedback/réclamation
+        \item Ajout d'un bouton d'accès au feedback et à la réclamation
         \item Intégration d'une WebView pour afficher le formulaire
         \item Gestion de la navigation entre l'application et la WebView
     \end{itemize}
@@ -238,7 +249,6 @@ suivants :
     \begin{itemize}
         \item Affichage d'un formulaire simple et responsive
         \item Saisie du type de retour (feedback ou réclamation)
-        \item Saisie du message par l'utilisateur
         \item Validation et envoi des données via API
     \end{itemize}
     
@@ -261,54 +271,65 @@ suivants :
 \section{Planning du stage}
 %----------------------------------------------------------
 
-Le stage de Lamyaa Lamssaoui chez Bewize s'étend sur une période de deux mois, 
-soit huit semaines. Le planning a été organisé de manière à couvrir toutes les 
-phases du projet, de l'immersion initiale jusqu'à la restitution finale, en 
-passant par la conception, le développement, les tests et une découverte du 
-marketing digital.
+Le stage de deux mois chez Bewize s'étend sur huit semaines. Le planning 
+a été organisé de manière à couvrir toutes les phases du projet, de 
+l'immersion initiale jusqu'à la restitution finale.
 
 \begin{table}[H]
 \centering
+\caption{Planning détaillé du stage}
+\label{tab:planning}
 \renewcommand{\arraystretch}{1.8}
 \begin{tabular}{|c|p{3.5cm}|p{5cm}|p{3cm}|}
 \hline
 \textbf{Semaine} & \textbf{Phase} & \textbf{Objectifs principaux} & 
 \textbf{Encadrement} \\
 \hline
-Semaine 1 & Immersion agile & Découverte de Bewize, formation à l'agilité, 
-introduction au framework Scrum, participation aux rituels agiles & 
+Semaine 1 & Immersion agile & Découverte de Bewize, formation à 
+l'agilité, introduction au framework Scrum & 
 Product Manager et équipe Bewize \\
 \hline
-Semaine 2 & Cadrage produit & Analyse du besoin business, étude de l'existant, 
-définition du périmètre, conception fonctionnelle & Product Manager \\
+Semaine 2 & Cadrage produit & Analyse du besoin business, étude de 
+l'existant, conception fonctionnelle & Product Manager \\
 \hline
-Semaine 3 & Conception technique & Définition de l'architecture, préparation 
-technique, début du développement front-end et back-end & Tech Lead et équipe dev \\
+Semaine 3 & Conception technique & Définition de l'architecture, 
+début du développement front-end et back-end & Tech Lead et équipe dev \\
 \hline
-Semaine 4 & Développement & Construction des composants, développement des 
-routes et services, premières intégrations & Tech Lead et équipe dev \\
+Semaine 4 & Développement & Construction des composants, premières 
+intégrations & Tech Lead et équipe dev \\
 \hline
-Semaine 5 & Intégration & Connexion à la base de données, liaisons API avec 
-le core produit, intégration dans l'environnement existant & 
+Semaine 5 & Intégration & Connexion base de données, liaisons API & 
 Tech Lead et équipe dev \\
 \hline
-Semaine 6 & Tests et validation & Tests fonctionnels et techniques, correction 
-des anomalies, vérification du parcours complet & Product Manager et Tech Lead \\
+Semaine 6 & Tests et validation & Tests fonctionnels, correction des 
+anomalies & Product Manager et Tech Lead \\
 \hline
-Semaine 7 & Marketing digital & Introduction aux pratiques marketing digital 
-chez Bewize, analyse des actions et canaux & Product Manager \\
+Semaine 7 & Marketing digital & Découverte des pratiques marketing 
+chez Bewize & Product Manager \\
 \hline
-Semaine 8 & Clôture & Synthèse du stage, documentation, préparation de la 
-restitution finale & Product Manager et équipe Bewize \\
+Semaine 8 & Clôture & Synthèse, documentation, restitution finale & 
+Product Manager et équipe Bewize \\
 \hline
 \end{tabular}
-\caption{Planning détaillé du stage}
-\label{tab:planning}
 \end{table}
 
+Le tableau \ref{tab:planning} présente la répartition des activités 
+sur les huit semaines du stage. Ce planning équilibré permet de 
+consacrer les premières semaines à la compréhension du contexte et 
+à la conception, les semaines centrales au développement et à 
+l'intégration, et les dernières semaines à la validation, aux tests 
+et à la découverte du marketing digital chez Bewize.
+
+%----------------------------------------------------------
 \section{Conclusion}
+%----------------------------------------------------------
+
 Ce chapitre a permis de définir le cadre complet du projet, en analysant 
-le contexte, les besoins fonctionnels et non fonctionnels, l'existant technique 
-de Bewize et la solution proposée. Cette analyse constitue la base indispensable 
-pour aborder sereinement les phases de conception et de développement présentées 
-dans les chapitres suivants.
+le contexte, les besoins fonctionnels et non fonctionnels, l'existant 
+technique de Bewize et la solution proposée. L'analyse des besoins a 
+mis en évidence sept besoins fonctionnels et six besoins non fonctionnels 
+qui guideront l'ensemble du développement. L'étude de l'existant a 
+confirmé la pertinence et la valeur ajoutée de la solution à développer. 
+Cette analyse constitue la base indispensable pour aborder sereinement 
+les phases de conception et de développement présentées dans les 
+chapitres suivants.
