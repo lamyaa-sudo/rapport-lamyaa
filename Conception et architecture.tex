@@ -1,8 +1,5 @@
 \chapter{Conception et architecture}
 
-\usepackage{tikz}
-\usetikzlibrary{shapes,arrows,positioning,fit,calc}
-
 \section{Introduction}
 Ce chapitre présente la conception détaillée et l'architecture technique 
 de la fonctionnalité de recueil de feedbacks et de réclamations développée 
@@ -13,12 +10,10 @@ gestion de projet adaptée est une condition indispensable au succès de tout
 projet informatique, particulièrement dans un contexte de stage en entreprise 
 où les délais sont courts et les attentes précises.
 
-Ce chapitre s'articule autour de quatre grands axes complémentaires et 
-progressifs : premièrement, la méthodologie de gestion de projet adoptée 
-(Agile et Scrum) qui a encadré l'ensemble du travail ; deuxièmement, 
-l'architecture globale de la solution décrivant comment les différents 
-composants s'articulent entre eux ; et troisièmement, la conception UML 
-et les diagrammes modélisant le comportement et la structure du système.
+Ce chapitre s'articule autour de quatre grands axes : premièrement, la 
+méthodologie de gestion de projet adoptée (Agile et Scrum) ; deuxièmement, 
+l'architecture globale de la solution ; troisièmement, la conception UML 
+et les diagrammes du système.
 
 %==========================================================
 \section{Méthodologie de projet : Agile et Scrum}
@@ -33,8 +28,7 @@ de méthodologies : les méthodes traditionnelles dites "en cascade"
 un processus séquentiel et rigide où chaque phase doit être entièrement 
 terminée avant de passer à la suivante. Bien qu'elles offrent une structure 
 claire, elles s'adaptent très difficilement aux changements de besoins 
-en cours de projet, ce qui peut conduire à la livraison d'un produit 
-qui ne correspond plus aux attentes réelles des utilisateurs.
+en cours de projet.
 
 Face à ces limitations, le mouvement Agile est apparu avec la publication 
 du Manifeste Agile en février 2001, signé par dix-sept experts reconnus 
@@ -42,20 +36,13 @@ en développement logiciel. Ce manifeste définit quatre valeurs fondamentales :
 
 \begin{itemize}
     \item \textbf{Les individus et leurs interactions} plutôt que les 
-    processus et les outils : la communication directe entre les membres 
-    de l'équipe est prioritaire sur le suivi rigide de procédures.
-    
+    processus et les outils.
     \item \textbf{Des logiciels opérationnels} plutôt qu'une documentation 
-    exhaustive : l'objectif est de livrer un produit fonctionnel apportant 
-    une valeur concrète à l'utilisateur final.
-    
+    exhaustive.
     \item \textbf{La collaboration avec les clients} plutôt que la 
-    négociation contractuelle : le représentant métier est impliqué tout 
-    au long du projet.
-    
+    négociation contractuelle.
     \item \textbf{L'adaptation au changement} plutôt que le suivi d'un 
-    plan rigide : les méthodes agiles accueillent favorablement les 
-    changements, même en cours de développement.
+    plan rigide.
 \end{itemize}
 
 \begin{figure}[H]
@@ -65,13 +52,16 @@ en développement logiciel. Ce manifeste définit quatre valeurs fondamentales :
     \label{fig:agile}
 \end{figure}
 
+La figure \ref{fig:agile} illustre le cycle itératif de la méthodologie 
+Agile, composé de six phases successives organisées autour d'un Sprint 
+central. Ce cycle permet de livrer régulièrement des incréments 
+fonctionnels et de s'adapter continuellement aux retours des parties 
+prenantes.
+
 \subsection{Le framework Scrum}
 Parmi les nombreux frameworks agiles existants, Bewize a choisi d'adopter 
-Scrum pour la gestion de ses projets de développement logiciel. Scrum est 
-le framework agile le plus largement utilisé dans l'industrie du logiciel. 
-Il a été formalisé par Ken Schwaber et Jeff Sutherland dans les années 1990.
-
-Scrum organise le travail en cycles itératifs de durée fixe appelés Sprints, 
+Scrum pour la gestion de ses projets de développement logiciel. Scrum 
+organise le travail en cycles itératifs de durée fixe appelés Sprints, 
 généralement d'une à quatre semaines. À la fin de chaque Sprint, l'équipe 
 livre un incrément potentiellement déployable du produit.
 
@@ -82,15 +72,17 @@ livre un incrément potentiellement déployable du produit.
     \label{fig:scrum}
 \end{figure}
 
+La figure \ref{fig:scrum} présente la vue d'ensemble du framework Scrum, 
+avec ses trois artefacts principaux (Product Backlog, Sprint Backlog et 
+Incrément), ses événements (Sprint Planning, Daily Scrum, Sprint Review 
+et Retrospective) et ses trois rôles (Product Owner, Scrum Master et 
+équipe de développement).
+
 \subsection{Équipe de développement Scrum chez Bewize}
-Une équipe Scrum est une unité cohésive de professionnels focalisés sur 
-un seul objectif à la fois. Le Scrum Guide définit trois rôles distincts, 
-chacun ayant des responsabilités précises et complémentaires.
 
 \subsubsection{Le Product Owner — Product Manager Bewize}
-Le Product Owner est responsable de maximiser la valeur du produit 
-résultant du travail de l'équipe. Dans le cadre du projet Bewize, ce rôle 
-est assuré par le Product Manager de l'entreprise :
+Le Product Owner est responsable de maximiser la valeur du produit. 
+Dans le cadre du projet Bewize, ce rôle est assuré par le Product Manager :
 \begin{itemize}
     \item Définir et communiquer clairement l'objectif du produit
     \item Créer, maintenir et prioriser le Product Backlog
@@ -99,8 +91,7 @@ est assuré par le Product Manager de l'entreprise :
 \end{itemize}
 
 \subsubsection{Le Scrum Master — Tech Lead Bewize}
-Le Scrum Master est responsable du bon fonctionnement de Scrum au sein 
-de l'équipe. Dans le projet Bewize, le Tech Lead assure ce rôle :
+Le Scrum Master est responsable du bon fonctionnement de Scrum :
 \begin{itemize}
     \item Coacher les membres de l'équipe dans l'application des pratiques Scrum
     \item Identifier et éliminer les obstacles qui bloquent la progression
@@ -123,11 +114,17 @@ de l'équipe. Dans le projet Bewize, le Tech Lead assure ce rôle :
     \label{fig:equipe_scrum}
 \end{figure}
 
+La figure \ref{fig:equipe_scrum} illustre la répartition des trois rôles 
+Scrum au sein de l'équipe projet chez Bewize. Le Product Manager assure 
+le rôle de Product Owner, le Tech Lead celui de Scrum Master, et l'équipe 
+de développement inclut la stagiaire Lamyaa Lamssaoui ainsi que les 
+développeurs Bewize.
+
 \subsection{Avantages de la méthodologie Scrum}
 
 \textbf{Livraison rapide et régulière de valeur :}
 Scrum organise le travail en Sprints courts de deux semaines, permettant 
-de livrer des fonctionnalités démontrables régulièrement.
+de livrer des fonctionnalités démontrables régulièrement au Product Manager.
 
 \textbf{Flexibilité et capacité d'adaptation :}
 Scrum permet d'intégrer les changements dans le prochain Sprint sans 
@@ -152,6 +149,11 @@ transparente entre tous les membres de l'équipe.
     \label{fig:avantages_scrum}
 \end{figure}
 
+La figure \ref{fig:avantages_scrum} synthétise les cinq avantages 
+principaux de la méthodologie Scrum adoptée pour ce projet : livraison 
+rapide, flexibilité, réduction des risques, amélioration continue et 
+communication renforcée.
+
 \subsection{Le Product Backlog}
 Le Product Backlog est le premier artefact officiel de Scrum. Il s'agit 
 d'une liste ordonnée et exhaustive de tout ce qui est nécessaire pour 
@@ -164,6 +166,8 @@ Story suivant le format :
 
 \begin{table}[H]
 \centering
+\caption{Product Backlog du projet}
+\label{tab:product_backlog}
 \renewcommand{\arraystretch}{1.8}
 \begin{tabular}{|c|p{7.5cm}|p{1.8cm}|p{1.5cm}|}
 \hline
@@ -197,9 +201,13 @@ US09 & En tant qu'agent Bewize, je veux des statistiques sur les
 retours afin d'analyser les tendances & Basse & 5 \\
 \hline
 \end{tabular}
-\caption{Product Backlog du projet}
-\label{tab:product_backlog}
 \end{table}
+
+Le tableau \ref{tab:product_backlog} présente les neuf User Stories 
+définies pour ce projet, classées par ordre de priorité décroissante. 
+Six User Stories sont de priorité haute, deux de priorité moyenne et 
+une de priorité basse. Le total des points d'effort est de 31 points, 
+répartis sur les trois Sprints du projet.
 
 \begin{figure}[H]
     \centering
@@ -208,14 +216,21 @@ retours afin d'analyser les tendances & Basse & 5 \\
     \label{fig:product_backlog}
 \end{figure}
 
+La figure \ref{fig:product_backlog} offre une représentation visuelle 
+du Product Backlog, permettant de visualiser rapidement la priorité 
+de chaque User Story grâce à un code couleur : rouge pour les priorités 
+hautes, orange pour les priorités moyennes et bleu pour les priorités basses.
+
 \subsection{Le Sprint Backlog}
 Le Sprint Backlog est le deuxième artefact officiel de Scrum. Le projet 
-a été organisé en trois Sprints principaux de deux semaines :
+a été organisé en trois Sprints principaux de deux semaines chacun.
 
 \textbf{Sprint 1 — Semaines 3 et 4 : Développement du formulaire WebView}
 
 \begin{table}[H]
 \centering
+\caption{Sprint Backlog — Sprint 1}
+\label{tab:sprint1}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|p{7cm}|p{2.5cm}|p{2cm}|}
 \hline
@@ -238,14 +253,18 @@ Affichage du message de confirmation & Lamyaa & Terminé \\
 Tests unitaires et correction des bugs & Lamyaa & Terminé \\
 \hline
 \end{tabular}
-\caption{Sprint Backlog — Sprint 1}
-\label{tab:sprint1}
 \end{table}
+
+Le tableau \ref{tab:sprint1} détaille les huit tâches réalisées lors 
+du premier Sprint, consacré au développement du formulaire WebView en 
+React JS. Toutes les tâches ont été menées à bien dans les délais impartis.
 
 \textbf{Sprint 2 — Semaines 5 et 6 : Intégration mobile et back-end}
 
 \begin{table}[H]
 \centering
+\caption{Sprint Backlog — Sprint 2}
+\label{tab:sprint2}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|p{7cm}|p{2.5cm}|p{2cm}|}
 \hline
@@ -266,14 +285,18 @@ Correction des bugs identifiés & Lamyaa & Terminé \\
 Validation technique par le Tech Lead & Tech Lead & Terminé \\
 \hline
 \end{tabular}
-\caption{Sprint Backlog — Sprint 2}
-\label{tab:sprint2}
 \end{table}
+
+Le tableau \ref{tab:sprint2} présente les sept tâches du deuxième Sprint, 
+dédié à l'intégration de la WebView dans l'application mobile React Native 
+et à la connexion du back-end Spring Boot avec la base de données PostgreSQL.
 
 \textbf{Sprint 3 — Semaine 6 : Dashboard monitor}
 
 \begin{table}[H]
 \centering
+\caption{Sprint Backlog — Sprint 3}
+\label{tab:sprint3}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|p{7cm}|p{2.5cm}|p{2cm}|}
 \hline
@@ -294,9 +317,13 @@ Tests fonctionnels complets du dashboard & Lamyaa & Terminé \\
 Validation finale par le Product Manager & Product Manager & Terminé \\
 \hline
 \end{tabular}
-\caption{Sprint Backlog — Sprint 3}
-\label{tab:sprint3}
 \end{table}
+
+Le tableau \ref{tab:sprint3} récapitule les sept tâches du troisième 
+Sprint, consacré au développement du dashboard monitor. Ce Sprint a 
+abouti à la livraison d'une interface complète de consultation et de 
+traitement des retours, validée par le Product Manager lors de la 
+Sprint Review finale.
 
 \begin{figure}[H]
     \centering
@@ -305,10 +332,17 @@ Validation finale par le Product Manager & Product Manager & Terminé \\
     \label{fig:sprint_backlog}
 \end{figure}
 
+La figure \ref{fig:sprint_backlog} présente le tableau Kanban utilisé 
+pour suivre l'avancement des tâches au fil des Sprints. Les tâches sont 
+organisées en trois colonnes : À faire, En cours et Terminé, permettant 
+une visualisation claire et instantanée de l'état d'avancement du projet.
+
 \subsection{Planification des Sprints}
 
 \begin{table}[H]
 \centering
+\caption{Planification générale des Sprints}
+\label{tab:planification}
 \renewcommand{\arraystretch}{1.8}
 \begin{tabular}{|c|p{3cm}|p{4cm}|p{4cm}|}
 \hline
@@ -336,9 +370,13 @@ S7-S8 & Clôture & Marketing digital &
 Présentation finale \\
 \hline
 \end{tabular}
-\caption{Planification générale des Sprints}
-\label{tab:planification}
 \end{table}
+
+Le tableau \ref{tab:planification} présente la planification générale 
+du projet sur les huit semaines du stage. Cette organisation permet 
+de visualiser clairement la progression des activités, depuis la phase 
+d'immersion initiale jusqu'à la clôture du stage, en passant par les 
+trois Sprints de développement.
 
 \begin{figure}[H]
     \centering
@@ -347,6 +385,11 @@ Présentation finale \\
     \label{fig:planning}
 \end{figure}
 
+La figure \ref{fig:planning} illustre la planification du projet sous 
+forme de diagramme de Gantt. Ce diagramme met en évidence la durée et 
+le chevauchement des différentes phases du projet, permettant de 
+visualiser l'enchaînement des activités et les jalons clés du stage.
+
 %==========================================================
 \section{Architecture globale du système}
 %==========================================================
@@ -354,17 +397,15 @@ Présentation finale \\
 \subsection{Vue d'ensemble}
 L'architecture de la fonctionnalité développée s'articule autour de 
 quatre composants principaux qui communiquent de manière cohérente et 
-structurée. Cette architecture suit le modèle client-serveur classique, 
-enrichi par l'utilisation d'une page WebView comme interface intermédiaire 
-entre l'application mobile et le back-end.
+structurée selon le modèle client-serveur.
 
 \subsection{Les quatre composants}
 
 \subsubsection{Application mobile Bewize (React Native)}
 L'application mobile constitue le point d'entrée de la fonctionnalité. 
 Elle est enrichie d'un bouton dédié permettant d'accéder au feedback 
-ou à la réclamation, et intègre un composant WebView pour afficher le 
-formulaire sans quitter l'application.
+ou à la réclamation, et intègre un composant WebView pour afficher 
+le formulaire sans quitter l'application.
 
 \subsubsection{Page WebView (React JS)}
 Interface web légère affichée dans l'application mobile via le composant 
@@ -389,35 +430,18 @@ consulter, filtrer et traiter les feedbacks et réclamations reçus.
     arrow/.style={->, >=stealth, thick},
     dasharrow/.style={->, >=stealth, dashed, gray}
 ]
-
-% App Mobile
 \node[box, fill=teal!15] (mobile) at (0,0) 
     {\textbf{Application Mobile}\\ React Native\\ iOS / Android};
-
-% WebView
 \node[box, fill=teal!15] (webview) at (0,-3) 
     {\textbf{Page WebView}\\ React JS\\ Formulaire};
-
-% Backend
 \node[box, fill=violet!15] (backend) at (5,-1.5) 
     {\textbf{Back-end}\\ Spring Boot\\ API REST};
-
-% PostgreSQL
 \node[box, fill=orange!15] (db) at (10,-1.5) 
     {\textbf{PostgreSQL}\\ Base de données\\ Table feedback};
-
-% Dashboard
 \node[box, fill=red!10] (dashboard) at (5,-4.5) 
     {\textbf{Dashboard}\\ Monitor\\ React JS};
-
-% User
 \node[font=\small] (user) at (0,2.2) {\textbf{Utilisateur}};
-\draw[thick] (user) -- ++(0,-0.6);
-
-% Team
 \node[font=\small] (team) at (5,-6.5) {\textbf{Équipe Bewize}};
-
-% Arrows
 \draw[arrow] (mobile) -- (webview) node[midway, right, font=\tiny] {ouvre};
 \draw[arrow] (webview) -- (backend) node[midway, above, font=\tiny] {HTTP POST};
 \draw[dasharrow] (backend) -- (webview) node[midway, below, font=\tiny] {HTTP 200};
@@ -426,11 +450,17 @@ consulter, filtrer et traiter les feedbacks et réclamations reçus.
 \draw[arrow] (dashboard) -- (backend) node[midway, right, font=\tiny] {HTTP GET};
 \draw[arrow] (team) -- (dashboard);
 \draw[arrow] (user) -- (mobile);
-
 \end{tikzpicture}
 \caption{Architecture globale de la solution}
 \label{fig:architecture}
 \end{figure}
+
+La figure \ref{fig:architecture} illustre l'architecture globale de la 
+solution développée, composée de quatre composants principaux interconnectés. 
+Les flèches pleines représentent les appels HTTP entrants et les flèches 
+pointillées les réponses. Le flux de données commence par l'utilisateur 
+mobile et se termine par la consultation de l'équipe Bewize dans le 
+dashboard monitor.
 
 \subsection{Flux de données}
 Le flux de données suit un chemin précis en neuf étapes :
@@ -478,20 +508,14 @@ fonctionnalités du point de vue des utilisateurs.
     actor/.style={font=\small, align=center},
     arrow/.style={->, >=stealth}
 ]
-
-% System boundary
 \draw[dashed, rounded corners=8pt, draw=black!40] 
     (1.5,-0.5) rectangle (9.5,-8.5);
 \node[font=\small\bfseries] at (5.5,-0.2) {Système Bewize};
-
-% Use cases
 \node[usecase] (uc1) at (5.5,-1.5) {Envoyer un feedback};
 \node[usecase] (uc2) at (5.5,-3) {Envoyer une réclamation};
 \node[usecase, fill=violet!10] (uc3) at (5.5,-4.8) {Consulter les retours};
 \node[usecase, fill=violet!10] (uc4) at (5.5,-6.3) {Traiter une réclamation};
 \node[usecase, fill=violet!10] (uc5) at (5.5,-7.8) {Filtrer les retours};
-
-% Actor left: Utilisateur mobile
 \node[actor] (user) at (-0.5,-2.2) {
     \begin{tikzpicture}[scale=0.5]
         \draw (0,0.6) circle (0.3);
@@ -502,8 +526,6 @@ fonctionnalités du point de vue des utilisateurs.
     \end{tikzpicture}\\[2pt]
     Utilisateur\\mobile
 };
-
-% Actor right: Equipe Bewize
 \node[actor] (team) at (11,-6.3) {
     \begin{tikzpicture}[scale=0.5]
         \draw (0,0.6) circle (0.3);
@@ -514,23 +536,26 @@ fonctionnalités du point de vue des utilisateurs.
     \end{tikzpicture}\\[2pt]
     Équipe\\Bewize
 };
-
-% Connections user -> UC
 \draw[arrow] (user) -- (uc1);
 \draw[arrow] (user) -- (uc2);
-
-% Connections team -> UC
 \draw[arrow] (team) -- (uc3);
 \draw[arrow] (team) -- (uc4);
 \draw[arrow] (team) -- (uc5);
-
 \end{tikzpicture}
 \caption{Diagramme de cas d'utilisation}
 \label{fig:use_case}
 \end{figure}
 
+La figure \ref{fig:use_case} présente le diagramme de cas d'utilisation 
+du système. Deux acteurs principaux interagissent avec le système : 
+l'utilisateur mobile qui peut envoyer des feedbacks et des réclamations, 
+et l'équipe interne Bewize qui peut consulter, filtrer et traiter 
+les retours reçus dans le dashboard monitor.
+
 \begin{table}[H]
 \centering
+\caption{Tableau des cas d'utilisation}
+\label{tab:use_case}
 \renewcommand{\arraystretch}{1.8}
 \begin{tabular}{|c|p{4cm}|p{3cm}|p{5cm}|}
 \hline
@@ -553,13 +578,18 @@ UC05 & Filtrer les retours & Équipe Bewize &
 Filtrer par type, date ou statut \\
 \hline
 \end{tabular}
-\caption{Tableau des cas d'utilisation}
-\label{tab:use_case}
 \end{table}
+
+Le tableau \ref{tab:use_case} récapitule les cinq cas d'utilisation 
+identifiés pour ce système. Les cas UC01 et UC02 concernent l'utilisateur 
+mobile, tandis que les cas UC03, UC04 et UC05 sont réservés à l'équipe 
+interne Bewize qui gère les retours reçus depuis le dashboard monitor.
 
 \subsubsection{UC01 — Envoyer un feedback}
 \begin{table}[H]
 \centering
+\caption{Description détaillée UC01 — Envoyer un feedback}
+\label{tab:uc01}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|p{4cm}|p{9cm}|}
 \hline
@@ -583,12 +613,19 @@ Filtrer par type, date ou statut \\
 \textbf{Exception} & Erreur réseau : message d'erreur affiché \\
 \hline
 \end{tabular}
-\caption{Description UC01 — Envoyer un feedback}
 \end{table}
+
+Le tableau \ref{tab:uc01} décrit en détail le cas d'utilisation UC01 
+relatif à l'envoi d'un feedback par l'utilisateur mobile. Le scénario 
+nominal comprend sept étapes, depuis le clic sur le bouton feedback 
+jusqu'à l'affichage du message de confirmation après l'enregistrement 
+réussi des données.
 
 \subsubsection{UC02 — Envoyer une réclamation}
 \begin{table}[H]
 \centering
+\caption{Description détaillée UC02 — Envoyer une réclamation}
+\label{tab:uc02}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|p{4cm}|p{9cm}|}
 \hline
@@ -612,12 +649,18 @@ Filtrer par type, date ou statut \\
 \textbf{Exception} & Champs vides : message de validation affiché \\
 \hline
 \end{tabular}
-\caption{Description UC02 — Envoyer une réclamation}
 \end{table}
+
+Le tableau \ref{tab:uc02} détaille le cas d'utilisation UC02 concernant 
+l'envoi d'une réclamation. Ce cas est similaire au UC01, mais se distingue 
+par la sélection du type "Réclamation" et par l'exception spécifique liée 
+à la validation des champs obligatoires du formulaire.
 
 \subsubsection{UC03 — Consulter et traiter les retours}
 \begin{table}[H]
 \centering
+\caption{Description détaillée UC03 — Consulter et traiter les retours}
+\label{tab:uc03}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|p{4cm}|p{9cm}|}
 \hline
@@ -639,8 +682,13 @@ Filtrer par type, date ou statut \\
 \textbf{Exception} & Aucun retour : message informatif affiché \\
 \hline
 \end{tabular}
-\caption{Description UC03 — Consulter et traiter}
 \end{table}
+
+Le tableau \ref{tab:uc03} présente le cas d'utilisation UC03 dédié à 
+la consultation et au traitement des retours par l'équipe Bewize. 
+Ce cas implique cinq étapes permettant à l'agent de naviguer dans 
+le dashboard, de filtrer les retours et de mettre à jour leur statut 
+de traitement.
 
 \subsection{Diagramme de séquence}
 Le diagramme de séquence illustre le déroulement temporel des interactions 
@@ -657,22 +705,16 @@ entre les composants lors de l'envoi d'un feedback ou d'une réclamation.
     ret/.style={->, >=stealth, dashed, gray},
     label/.style={font=\tiny, above}
 ]
-
-% Header boxes
 \node[box, fill=gray!20]    (u)  at (0,0)    {Utilisateur};
 \node[box, fill=teal!20]    (m)  at (2.8,0)  {App Mobile};
 \node[box, fill=teal!20]    (w)  at (5.6,0)  {WebView};
 \node[box, fill=violet!20]  (a)  at (8.4,0)  {API Spring};
 \node[box, fill=orange!20]  (db) at (11.2,0) {PostgreSQL};
-
-% Lifelines
 \draw[lifeline] (0,-0.3)   -- (0,-9.5);
 \draw[lifeline] (2.8,-0.3) -- (2.8,-9.5);
 \draw[lifeline] (5.6,-0.3) -- (5.6,-9.5);
 \draw[lifeline] (8.4,-0.3) -- (8.4,-9.5);
 \draw[lifeline] (11.2,-0.3)-- (11.2,-9.5);
-
-% Messages
 \draw[msg] (0,-1)    -- (2.8,-1)    node[label, midway] {1. Clique feedback};
 \draw[msg] (2.8,-1.8)-- (5.6,-1.8)  node[label, midway] {2. Ouvre WebView};
 \draw[ret] (5.6,-2.6)-- (0,-2.6)    node[label, midway] {3. Affiche formulaire};
@@ -683,29 +725,22 @@ entre les composants lors de l'envoi d'un feedback ou d'une réclamation.
 \draw[ret] (8.4,-6.6)-- (5.6,-6.6)  node[label, midway] {8. HTTP 200};
 \draw[ret] (5.6,-7.4)-- (0,-7.4)    node[label, midway] {9. Confirmation};
 \draw[ret] (8.4,-8.2)-- (5.6,-8.2)  node[label, midway] {10. Retours disponibles};
-
 \end{tikzpicture}
 \caption{Diagramme de séquence — Envoi d'un feedback ou réclamation}
 \label{fig:sequence}
 \end{figure}
 
-Le scénario se déroule en dix étapes :
-\begin{enumerate}
-    \item L'utilisateur clique sur le bouton dans l'application React Native
-    \item L'application ouvre le composant WebView
-    \item La WebView charge le formulaire React JS
-    \item L'utilisateur remplit et soumet le formulaire
-    \item La WebView envoie une requête HTTP POST à l'API Spring Boot
-    \item Le back-end valide les données reçues
-    \item Les données sont persistées dans PostgreSQL
-    \item PostgreSQL confirme l'enregistrement
-    \item Le back-end retourne HTTP 200 à la WebView
-    \item La WebView affiche le message de confirmation
-\end{enumerate}
+La figure \ref{fig:sequence} illustre le déroulement chronologique 
+des interactions entre les cinq composants du système lors de l'envoi 
+d'un feedback ou d'une réclamation. Les flèches pleines représentent 
+les appels et les flèches pointillées les réponses. Le scénario complet 
+se déroule en dix étapes, de l'action initiale de l'utilisateur jusqu'à 
+l'affichage du message de confirmation.
 
 \subsection{Diagramme de classes}
 Le diagramme de classes représente la structure statique du système. 
-L'architecture back-end suit le pattern en couches de Spring Boot.
+L'architecture back-end suit le pattern en couches de Spring Boot : 
+Controller, Service, Repository et Entity.
 
 \begin{figure}[H]
 \centering
@@ -718,90 +753,60 @@ L'architecture back-end suit le pattern en couches de Spring Boot.
     arrow/.style={->, >=stealth, thick},
     dasharrow/.style={->, >=stealth, dashed}
 ]
-% FeedbackController
 \node[header, fill=violet!20] (ch) at (0,0) {FeedbackController};
 \node[class, below=0pt of ch, align=left, text width=3.3cm, 
       minimum height=1.4cm] (cb) 
     {- feedbackService\\
      \hline\\
-     + createFeedback()\\
-     + getAllFeedbacks()\\
-     + updateStatut()};
-
-% FeedbackService
+     + createFeedback()\\+ getAllFeedbacks()\\+ updateStatut()};
 \node[header, fill=teal!20] (sh) at (4.5,0) {FeedbackService};
 \node[class, below=0pt of sh, align=left, text width=3.3cm,
       minimum height=1.4cm] (sb) 
     {- feedbackRepo\\
      \hline\\
-     + save(feedback)\\
-     + findAll()\\
-     + updateStatut()\\
-     + getStats()};
-
-% FeedbackRepository
+     + save(feedback)\\+ findAll()\\+ updateStatut()\\+ getStats()};
 \node[header, fill=orange!20] (rh) at (9,0) {FeedbackRepository};
 \node[class, below=0pt of rh, align=left, text width=3.3cm,
       minimum height=1.4cm] (rb) 
-    {\textit{«interface»}\\
+    {\textit{«interface»}\\JpaRepository\\
      \hline\\
-     + findByType()\\
-     + findByStatut()};
-
-% Feedback Entity
+     + findByType()\\+ findByStatut()};
 \node[header, fill=red!10] (fh) at (4.5,-4.5) {Feedback};
 \node[class, below=0pt of fh, align=left, text width=3.3cm,
       minimum height=1.8cm] (fb) 
-    {- id: Long\\
-     - type: String\\
-     - message: String\\
-     - dateEnvoi: DateTime\\
-     - statut: String\\
-     - utilisateurId: Long\\
+    {- id: Long\\- type: String\\- message: String\\
+     - dateEnvoi: DateTime\\- statut: String\\- utilisateurId: Long\\
      \hline\\
-     + getters()\\
-     + setters()};
-
-% Utilisateur Entity
+     + getters()\\+ setters()};
 \node[header, fill=gray!20] (uh) at (9,-4.5) {Utilisateur};
 \node[class, below=0pt of uh, align=left, text width=3.3cm,
       minimum height=1.2cm] (ubb) 
-    {- id: Long\\
-     - nom: String\\
-     - email: String\\
+    {- id: Long\\- nom: String\\- email: String\\
      \hline\\
-     + getters()\\
-     + setters()};
-% Arrows
+     + getters()\\+ setters()};
 \draw[arrow] (cb) -- (sb) node[midway, above, font=\tiny] {uses};
 \draw[arrow] (sb) -- (rb) node[midway, above, font=\tiny] {uses};
 \draw[arrow] (sb) -- (fh) node[midway, right, font=\tiny] {manages};
-\draw[dasharrow] (rb) -- (fh) node[midway, left, font=\tiny] {};
+\draw[dasharrow] (rb) -- (fh);
 \draw[arrow] (fb) -- (ubb) node[midway, above, font=\tiny] {belongs to};
-
 \end{tikzpicture}
 \caption{Diagramme de classes}
 \label{fig:classes}
 \end{figure}
 
-Les classes principales sont :
-\begin{itemize}
-    \item \textbf{Feedback (Entity) :} classe centrale avec les attributs 
-    id, type, message, dateEnvoi, statut et utilisateurId
-    \item \textbf{FeedbackController :} expose les endpoints REST API 
-    et délègue au FeedbackService
-    \item \textbf{FeedbackService :} implémente la logique métier et 
-    coordonne entre le contrôleur et le repository
-    \item \textbf{FeedbackRepository :} interface JPA gérant la 
-    persistance dans PostgreSQL
-    \item \textbf{Utilisateur :} représente l'utilisateur de 
-    l'application mobile
-\end{itemize}
+La figure \ref{fig:classes} présente le diagramme de classes du système, 
+organisé selon le pattern en couches de Spring Boot. Le FeedbackController 
+reçoit les requêtes HTTP et délègue au FeedbackService qui implémente 
+la logique métier. Le FeedbackService utilise le FeedbackRepository 
+pour persister les données dans PostgreSQL via Spring Data JPA. La classe 
+Feedback est l'entité centrale du modèle, liée à la classe Utilisateur.
 
 \subsection{Conception de la base de données}
 
 \begin{table}[H]
 \centering
+\caption{Structure de la table feedback en base de données}
+\label{tab:bdd}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|p{3cm}|p{3cm}|p{2.5cm}|p{4.5cm}|}
 \hline
@@ -820,14 +825,20 @@ statut & VARCHAR(20) & NOT NULL & NOUVEAU, EN\_COURS, TRAITE \\
 utilisateur\_id & BIGINT & FOREIGN KEY & Référence à l'utilisateur \\
 \hline
 \end{tabular}
-\caption{Structure de la table feedback}
-\label{tab:bdd}
 \end{table}
+
+Le tableau \ref{tab:bdd} décrit la structure de la table \texttt{feedback} 
+dans la base de données PostgreSQL. Cette table comporte six colonnes 
+couvrant l'identifiant unique, le type de retour, le contenu du message, 
+la date d'envoi, le statut de traitement et la référence à l'utilisateur 
+ayant soumis le retour.
 
 \subsection{Conception de l'API REST}
 
 \begin{table}[H]
 \centering
+\caption{Endpoints REST API exposés par le back-end Spring Boot}
+\label{tab:api}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|p{1.8cm}|p{5cm}|p{2cm}|p{4cm}|}
 \hline
@@ -844,9 +855,13 @@ PUT & /api/feedbacks/\{id\}/statut & Dashboard & Mettre à jour le statut \\
 GET & /api/feedbacks/stats & Dashboard & Statistiques des retours \\
 \hline
 \end{tabular}
-\caption{Endpoints REST API}
-\label{tab:api}
 \end{table}
+
+Le tableau \ref{tab:api} présente les cinq endpoints REST API exposés 
+par le back-end Spring Boot. L'endpoint POST est consommé par la WebView 
+pour soumettre les retours utilisateurs, tandis que les endpoints GET 
+et PUT sont utilisés par le dashboard monitor pour consulter, filtrer 
+et mettre à jour le statut des retours reçus.
 
 %==========================================================
 \section{Conclusion}
@@ -854,15 +869,16 @@ GET & /api/feedbacks/stats & Dashboard & Statistiques des retours \\
 
 Ce chapitre a présenté de manière complète et structurée l'ensemble 
 des aspects méthodologiques, architecturaux et conceptuels du projet 
-développé chez Bewize.
+développé chez Bewize. La méthodologie Agile Scrum, avec ses trois 
+Sprints bien définis et ses artefacts (Product Backlog et Sprint Backlog), 
+a permis d'organiser le travail de manière itérative et efficace, en 
+livrant régulièrement des incréments fonctionnels validés par le Product 
+Manager.
 
-La méthodologie Agile Scrum, avec ses trois Sprints bien définis, 
-ses artefacts (Product Backlog et Sprint Backlog) et ses événements 
-(Sprint Planning, Daily Scrum, Sprint Review), a permis d'organiser 
-le travail de manière itérative et efficace.
-
-L'architecture en quatre composants (application mobile, WebView, 
-back-end et dashboard) garantit une séparation claire des responsabilités. 
-Les diagrammes UML réalisés — cas d'utilisation, séquence et classes — 
-constituent une base solide pour la phase d'implémentation détaillée 
-dans le chapitre suivant.
+L'architecture en quatre composants (application mobile React Native, 
+page WebView React JS, back-end Spring Boot et dashboard monitor) garantit 
+une séparation claire des responsabilités et une intégration cohérente 
+dans l'écosystème existant de Bewize. Les diagrammes UML réalisés — 
+cas d'utilisation, séquence et classes — fournissent une modélisation 
+rigoureuse du système, constituant une base solide pour la phase 
+d'implémentation détaillée dans le chapitre suivant.
