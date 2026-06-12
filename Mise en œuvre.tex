@@ -2,7 +2,7 @@
 
 \section{Introduction}
 Ce chapitre présente la mise en œuvre concrète de la fonctionnalité 
-de recueil de feedbacks et de réclamations développée dans le cadre 
+de recueil de réclamations développée dans le cadre 
 du stage chez Bewize. Après avoir défini les besoins dans le chapitre 
 de cadrage et établi la conception dans le chapitre précédent, il 
 s'agit maintenant de décrire en détail l'implémentation technique 
@@ -20,8 +20,8 @@ du dashboard monitor.
 %==========================================================
 
 \subsection{Introduction aux choix technologiques}
-Le développement de la fonctionnalité de recueil de feedbacks et de 
-réclamations chez Bewize repose sur un ensemble de technologies modernes, 
+Le développement de la fonctionnalité de recueil de réclamations 
+chez Bewize repose sur un ensemble de technologies modernes, 
 complémentaires et éprouvées. Le choix de ces technologies a été guidé 
 par les contraintes de l'environnement existant chez Bewize, les bonnes 
 pratiques du développement logiciel moderne, et les exigences de 
@@ -44,10 +44,10 @@ monitor permettant à l'équipe Bewize de consulter et traiter les retours.
 
 \textbf{Utilisation dans le projet :}
 \begin{itemize}
-    \item \textbf{La page WebView :} formulaire de saisie de feedback 
-    ou réclamation, accessible depuis l'application mobile
+    \item \textbf{La page WebView :} formulaire de saisie de réclamation, 
+    accessible depuis l'application mobile
     \item \textbf{Le dashboard monitor :} interface interne de 
-    consultation et traitement des retours utilisateurs
+    consultation et traitement des réclamations
 \end{itemize}
 
 \textbf{Avantages pour le projet :}
@@ -91,9 +91,9 @@ APIs REST consommées par la WebView et le dashboard monitor.
 \textbf{Utilisation dans le projet :}
 \begin{itemize}
     \item Exposition des endpoints REST API pour la WebView et le dashboard
-    \item Réception, validation et traitement des données de feedback
+    \item Réception, validation et traitement des données de réclamation
     \item Persistance des données dans PostgreSQL via Spring Data JPA
-    \item Gestion de la logique métier des feedbacks et réclamations
+    \item Gestion de la logique métier des réclamations
 \end{itemize}
 
 \textbf{Avantages pour le projet :}
@@ -182,12 +182,11 @@ offre des fonctionnalités collaboratives avancées.
 La figure \ref{fig:postgresql} présente le logo de PostgreSQL, système 
 de gestion de base de données relationnelle open-source reconnu pour 
 sa robustesse et ses excellentes performances. PostgreSQL est utilisé 
-dans ce projet pour stocker l'ensemble des données liées aux feedbacks 
-et réclamations.
+dans ce projet pour stocker l'ensemble des données liées aux réclamations.
 
 \textbf{Utilisation dans le projet :}
 \begin{itemize}
-    \item Stockage des feedbacks et réclamations
+    \item Stockage des réclamations
     \item Gestion des statuts de traitement
     \item Requêtes de filtrage pour le dashboard monitor
 \end{itemize}
@@ -215,7 +214,7 @@ Docker & DevOps & Conteneurisation et déploiement \\
 \hline
 Git / GitHub & Versioning & Contrôle de version et collaboration \\
 \hline
-PostgreSQL & Base de données & Stockage des feedbacks et réclamations \\
+PostgreSQL & Base de données & Stockage des réclamations \\
 \hline
 \end{tabular}
 \end{table}
@@ -269,52 +268,6 @@ configurés sur le poste de développement. Ces outils couvrent l'ensemble
 des besoins du projet, depuis l'environnement d'exécution JavaScript 
 et Java jusqu'aux outils de test des APIs REST.
 
-\subsection{Configuration de Docker}
-L'ensemble des services de l'application a été conteneurisé avec Docker 
-afin de garantir la cohérence entre les environnements de développement 
-et de production. Le fichier \texttt{docker-compose.yml} orchestre 
-les trois conteneurs principaux : le back-end Spring Boot, la base 
-de données PostgreSQL et la page WebView React JS.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.88\textwidth]{Figures/docker_compose1.png}
-    \includegraphics[width=0.88\textwidth]{Figures/docker_compose2.png}
-    \caption{Configuration complète du fichier docker-compose.yml}
-    \label{fig:docker_compose}
-\end{figure}
-
-La figure \ref{fig:docker_compose} illustre la configuration complète 
-du fichier \texttt{docker-compose.yml} utilisée pour orchestrer les 
-trois conteneurs du projet. Cette configuration définit les services, 
-les ports exposés, les variables d'environnement et les dépendances 
-entre conteneurs, garantissant un démarrage automatique et ordonné 
-de l'ensemble des services.
-
-\subsection{Initialisation du dépôt Git}
-Dès le début du projet, un dépôt Git a été initialisé sur GitHub 
-pour versionner l'ensemble du code source. La structure de branches 
-adoptée suit la méthodologie Gitflow :
-
-\begin{itemize}
-    \item \textbf{main :} branche principale contenant le code stable
-    \item \textbf{develop :} branche de développement
-    \item \textbf{feature/webview-form :} formulaire WebView
-    \item \textbf{feature/dashboard :} dashboard monitor
-\end{itemize}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.88\textwidth]{Figures/git_branches.png}
-    \caption{Structure des branches Git selon la méthodologie Gitflow}
-    \label{fig:git_branches}
-\end{figure}
-
-La figure \ref{fig:git_branches} illustre la structure des branches Git 
-adoptée pour ce projet selon la méthodologie Gitflow. Les branches de 
-fonctionnalité ont été créées à partir de la branche develop et 
-fusionnées dans main lors des jalons de livraison.
-
 %==========================================================
 \section{Développement du formulaire WebView}
 %==========================================================
@@ -348,7 +301,7 @@ Le composant principal du formulaire WebView comprend les champs suivants :
     \centering
     \includegraphics[width=0.6\textwidth]{Figures/webview_form_1.png}
     \includegraphics[width=0.6\textwidth]{Figures/webview_form_2.png}
-    \caption{Interface complète du formulaire WebView de recueil de feedbacks}
+    \caption{Interface complète du formulaire WebView de recueil de réclamations}
     \label{fig:webview_form}
 \end{figure}
 
@@ -387,44 +340,24 @@ Spring Boot via une requête HTTP POST.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Figures/webview_confirmation.png}
-    \caption{Message de confirmation après l'envoi réussi du formulaire}
+    \includegraphics[width=0.8\textwidth]{Figures/reclamation_success.png}
+    \caption{Message de confirmation après l'envoi réussi de la réclamation}
     \label{fig:webview_confirmation}
 \end{figure}
 
 La figure \ref{fig:webview_confirmation} présente le message de 
-confirmation affiché à l'utilisateur après l'envoi réussi de son 
-feedback ou de sa réclamation. Ce message inclut un numéro de référence 
-unique permettant de retrouver le retour dans le dashboard monitor, 
-ainsi que la date et l'heure d'envoi.
+confirmation affiché à l'utilisateur après l'envoi réussi de sa 
+réclamation. Ce message confirme que la réclamation a bien été 
+enregistrée avec son numéro de référence unique.
 
 %==========================================================
 \section{Développement du back-end Spring Boot}
 %==========================================================
 
-\subsection{Création du projet Spring Boot}
-Le projet Spring Boot a été créé avec les dépendances suivantes :
-
-\begin{itemize}
-    \item \textbf{Spring Web :} pour la création des APIs REST
-    \item \textbf{Spring Data JPA :} pour la persistance des données
-    \item \textbf{PostgreSQL Driver :} pour la connexion à PostgreSQL
-    \item \textbf{Spring Validation :} pour la validation des données
-    \item \textbf{Lombok :} pour la réduction du code boilerplate
-    \item \textbf{SpringDoc OpenAPI :} pour la documentation Swagger
-\end{itemize}
-
-\subsection{Développement de l'entité Feedback}
-L'entité Feedback est la classe centrale du modèle avec les attributs :
-
-\begin{itemize}
-    \item \textbf{id :} identifiant unique auto-généré
-    \item \textbf{type :} FEEDBACK ou RECLAMATION
-    \item \textbf{message :} contenu textuel du retour
-    \item \textbf{dateEnvoi :} date et heure d'envoi
-    \item \textbf{statut :} NOUVEAU, EN\_COURS ou TRAITE
-    \item \textbf{utilisateurId :} identifiant de l'utilisateur
-\end{itemize}
+Le back-end Spring Boot a été développé en suivant une architecture 
+en couches, comprenant les composants Controller, Service et Repository. 
+Il expose des APIs REST pour la gestion et le suivi des réclamations 
+des utilisateurs.
 
 \subsection{Développement du Controller}
 Le FeedbackController expose les endpoints REST API suivants :
@@ -439,22 +372,22 @@ Le FeedbackController expose les endpoints REST API suivants :
 \textbf{Méthode} & \textbf{Endpoint} & \textbf{Code retour} & 
 \textbf{Description} \\
 \hline
-POST & /api/feedbacks & 201 Created & Créer un nouveau retour \\
+POST & /api/feedbacks & 201 Created & Créer une nouvelle réclamation \\
 \hline
-GET & /api/feedbacks & 200 OK & Liste de tous les retours \\
+GET & /api/feedbacks & 200 OK & Liste de toutes les réclamations \\
 \hline
-GET & /api/feedbacks/\{id\} & 200 OK & Détail d'un retour \\
+GET & /api/feedbacks/\{id\} & 200 OK & Détail d'une réclamation \\
 \hline
 PUT & /api/feedbacks/\{id\}/statut & 200 OK & Mettre à jour le statut \\
 \hline
-GET & /api/feedbacks/stats & 200 OK & Statistiques des retours \\
+GET & /api/feedbacks/stats & 200 OK & Statistiques des réclamations \\
 \hline
 \end{tabular}
 \end{table}
 
 Le tableau \ref{tab:endpoints} présente les cinq endpoints REST API 
 développés dans le FeedbackController. L'endpoint POST retourne un 
-code HTTP 201 lors de la création réussie d'un retour, tandis que 
+code HTTP 201 lors de la création réussie d'une réclamation, tandis que 
 les endpoints GET et PUT retournent un code HTTP 200.
 
 %==========================================================
@@ -491,8 +424,8 @@ utilisateur\_id & BIGINT & NOT NULL & Identifiant utilisateur \\
 Le tableau \ref{tab:table_feedback} décrit la structure de la table 
 \texttt{feedback} créée automatiquement par Spring Data JPA dans la 
 base de données PostgreSQL. Cette table comporte six colonnes permettant 
-de stocker toutes les informations nécessaires à la gestion des retours 
-utilisateurs, depuis leur création jusqu'à leur traitement complet 
+de stocker toutes les informations nécessaires à la gestion des 
+réclamations, depuis leur création jusqu'à leur traitement complet 
 par l'équipe Bewize.
 
 %==========================================================
@@ -503,61 +436,15 @@ par l'équipe Bewize.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{Figures/dashboard_home.png}
+    \includegraphics[width=0.9\textwidth]{Figures/dashboard_reclamations.png}
     \caption{Page d'accueil du dashboard monitor Bewize}
     \label{fig:dashboard_home}
 \end{figure}
 
 La figure \ref{fig:dashboard_home} présente la page d'accueil du 
 dashboard monitor développé en React JS. Cette interface affiche 
-quatre indicateurs clés en temps réel : le nombre total de retours 
-reçus, le nombre de réclamations, le nombre de retours en attente 
-de traitement et le taux de traitement global.
-
-\subsection{Page liste des retours}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{Figures/dashboard_list.png}
-    \caption{Page liste des feedbacks et réclamations dans le dashboard}
-    \label{fig:dashboard_list}
-\end{figure}
-
-La figure \ref{fig:dashboard_list} présente la page de liste complète 
-des feedbacks et réclamations reçus. Chaque retour est affiché sous 
-forme de ligne dans un tableau paginé, avec son identifiant, son type, 
-son objet, l'utilisateur émetteur, la date d'envoi et le statut de 
-traitement.
-
-\subsection{Fonctionnalité de filtrage}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{Figures/dashboard_filter.png}
-    \caption{Fonctionnalité de filtrage des retours dans le dashboard}
-    \label{fig:dashboard_filter}
-\end{figure}
-
-La figure \ref{fig:dashboard_filter} illustre la fonctionnalité de 
-filtrage avancé du dashboard monitor. Des boutons de filtre rapide 
-permettent à l'équipe de basculer entre tous les retours, uniquement 
-les feedbacks ou uniquement les réclamations, ainsi que de filtrer 
-par statut.
-
-\subsection{Tableau de bord statistiques}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{Figures/dashboard_stats.png}
-    \caption{Tableau de bord statistiques du dashboard monitor}
-    \label{fig:dashboard_stats}
-\end{figure}
-
-La figure \ref{fig:dashboard_stats} présente le tableau de bord 
-statistiques du dashboard monitor. Cette vue synthétique affiche la 
-répartition des retours par type sous forme de graphique en donut, 
-la répartition par statut sous forme de barres horizontales, et 
-l'évolution du nombre de retours par semaine.
+la liste complète des réclamations reçues avec leurs informations 
+détaillées : identifiant, nom, email, statut, type, objet et date.
 
 %==========================================================
 \section{Tests de l'application}
@@ -590,46 +477,40 @@ ou manquantes.
 \textbf{ID Test} & \textbf{Scénario testé} & \textbf{Résultat attendu} & 
 \textbf{Résultat obtenu} \\
 \hline
-T01 & Envoi d'un feedback valide depuis la WebView & 
+T01 & Envoi d'une réclamation valide depuis la WebView & 
 Confirmation affichée, données en base & Conforme \\
 \hline
-T02 & Envoi d'une réclamation valide depuis la WebView & 
-Confirmation affichée, données en base & Conforme \\
-\hline
-T03 & Envoi avec champs vides & 
+T02 & Envoi avec champs vides & 
 Messages de validation affichés & Conforme \\
 \hline
-T04 & Consultation des retours dans le dashboard & 
+T03 & Consultation des réclamations dans le dashboard & 
 Liste affichée correctement & Conforme \\
 \hline
-T05 & Filtrage par type dans le dashboard & 
+T04 & Filtrage par type dans le dashboard & 
 Résultats filtrés correctement & Conforme \\
 \hline
-T06 & Changement de statut d'une réclamation & 
+T05 & Changement de statut d'une réclamation & 
 Statut mis à jour en base et affiché & Conforme \\
-\hline
-T07 & Affichage des statistiques & 
-Données calculées et affichées & Conforme \\
 \hline
 \end{tabular}
 \end{table}
 
-Le tableau \ref{tab:tests} présente les résultats des sept tests 
+Le tableau \ref{tab:tests} présente les résultats des tests 
 fonctionnels bout en bout réalisés. Ces tests couvrent l'ensemble 
-du parcours utilisateur, depuis l'envoi d'un retour depuis la WebView 
-jusqu'à sa consultation et son traitement dans le dashboard monitor. 
-Tous les tests ont été réalisés avec succès.
+du parcours utilisateur, depuis l'envoi d'une réclamation depuis 
+la WebView jusqu'à sa consultation et son traitement dans le 
+dashboard monitor. Tous les tests ont été réalisés avec succès.
 
 %==========================================================
 \section{Conclusion}
 %==========================================================
 
 Ce chapitre a présenté en détail la mise en œuvre complète de la 
-fonctionnalité de recueil de feedbacks et de réclamations développée 
-dans le cadre du stage chez Bewize. L'implémentation a couvert 
-l'ensemble des composants de la solution : les technologies utilisées, 
-le formulaire WebView React JS, le back-end Spring Boot avec ses APIs 
-REST, la base de données PostgreSQL et le dashboard monitor.
+fonctionnalité de recueil de réclamations développée dans le cadre 
+du stage chez Bewize. L'implémentation a couvert l'ensemble des 
+composants de la solution : les technologies utilisées, le formulaire 
+WebView React JS, le back-end Spring Boot avec ses APIs REST, la base 
+de données PostgreSQL et le dashboard monitor.
 
 Chaque composant a été développé en suivant les bonnes pratiques du 
 développement logiciel moderne, avec une attention particulière portée 
