@@ -36,7 +36,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{csquotes}
 \usepackage{fancyhdr}
-
 % En-tête sans logo (obligatoire FST)
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0.4pt}
@@ -45,14 +44,12 @@
 \fancyhead[R]{Lamyaa Lamssaoui}
 \fancyfoot{}
 \fancyfoot[C]{\thepage}
-
 % Pages préliminaires sans en-tête ni pied de page
 \fancypagestyle{plain}{
     \fancyhf{}
     \fancyfoot[C]{\thepage}
     \renewcommand{\headrulewidth}{0pt}
 }
-
 \usepackage{titlesec}
 \titlespacing{\chapter}{0pt}{*4}{*2.5}
 \DeclareSourcemap{
@@ -68,7 +65,6 @@
   }
 }
 \input{formatting}
-
 % Couleurs uniquement noir (obligatoire FST)
 \definecolor{titleColor}{RGB}{0,0,0}
 \titleformat{\chapter}[display]
@@ -80,16 +76,19 @@
   {\normalfont\large\bfseries\itshape}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}
   {\normalfont\normalsize\bfseries\itshape}{\thesubsubsection}{1em}{}
-
 \usepackage{pdfpages}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,positioning,fit,calc}
-\begin{document}
 
+% ↓↓↓ LIGNES AJOUTÉES ↓↓↓
+\usepackage[titles]{tocloft}
+\setlength{\cftbeforefigskip}{0pt}
+% ↑↑↑ LIGNES AJOUTÉES ↑↑↑
+
+\begin{document}
 % PAGE DE GARDE
 \pagestyle{empty}
 \input{titlepage}
-
 % Bismillah
 \newpage
 \thispagestyle{empty}
@@ -98,67 +97,48 @@
     \includegraphics[width=0.6\textwidth]{Figures/bismillah.png}
 \end{center}
 \vspace*{\fill}
-
 % PAGES PRELIMINAIRES
 \pagenumbering{roman}
 \setcounter{page}{1}
 \pagestyle{plain}
-
 \newpage
 \input{Dedicace}
-
 \newpage
 \input{remerciement}
-
 \newpage
 \input{Résumé}
-
 \newpage
 \input{Abreviations}
-
 \newpage
 \listoftables
-
 \newpage
 \listoffigures
-
 \newpage
 \tableofcontents
-
 % CORPS DU RAPPORT
 \pagenumbering{arabic}
 \setcounter{page}{1}
 \pagestyle{fancy}
-
 \newpage
 \input{Introduction}
-
 \newpage
-\input{Entreprise_acceuil}
-
+%\input{Entreprise_acceuil}
 \newpage
-\input{Cadrage de besoin et analyse}
-
+%\input{Cadrage de besoin et analyse}
 \newpage
- \input{Conception et architecture}
-
+  %\input{Conception et architecture}
 \newpage
- \input{Mise en œuvre}
-
+  \input{Mise en œuvre}
 \newpage
- \input{Test et résultats}
-
+  %\input{Test et résultats}
 \newpage
- \input{Conclusion générale}
-
+ %\input{Conclusion générale}
 % BIBLIOGRAPHIE
 \newpage
 \printbibliography[nottype=misc,title={Bibliographie}]
 \newpage
 \printbibliography[type=misc,title={Webographie}]
-
 % GLOSSAIRE
 \newpage
-\input{Glossaire}
-
+%\input{Glossaire}
 \end{document}
