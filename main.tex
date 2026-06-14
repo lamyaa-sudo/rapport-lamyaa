@@ -36,7 +36,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{csquotes}
 \usepackage{fancyhdr}
-% En-tête sans logo (obligatoire FST)
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0.4pt}
 \fancyhead{}
@@ -44,7 +43,6 @@
 \fancyhead[R]{Lamyaa Lamssaoui}
 \fancyfoot{}
 \fancyfoot[C]{\thepage}
-% Pages préliminaires sans en-tête ni pied de page
 \fancypagestyle{plain}{
     \fancyhf{}
     \fancyfoot[C]{\thepage}
@@ -65,7 +63,6 @@
   }
 }
 \input{formatting}
-% Couleurs uniquement noir (obligatoire FST)
 \definecolor{titleColor}{RGB}{0,0,0}
 \titleformat{\chapter}[display]
   {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
@@ -79,16 +76,14 @@
 \usepackage{pdfpages}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,positioning,fit,calc}
-
-% ↓↓↓ LIGNES AJOUTÉES ↓↓↓
 \usepackage[titles]{tocloft}
 \setlength{\cftbeforefigskip}{0pt}
-% ↑↑↑ LIGNES AJOUTÉES ↑↑↑
 
 \begin{document}
-% PAGE DE GARDE
-\pagestyle{empty}
-\input{titlepage}
+
+% PAGE DE GARDE (ton PDF rempli dans Word)
+\includepdf{pagedeGarde.pdf}
+
 % Bismillah
 \newpage
 \thispagestyle{empty}
@@ -97,6 +92,7 @@
     \includegraphics[width=0.6\textwidth]{Figures/bismillah.png}
 \end{center}
 \vspace*{\fill}
+
 % PAGES PRELIMINAIRES
 \pagenumbering{roman}
 \setcounter{page}{1}
@@ -115,6 +111,7 @@
 \listoffigures
 \newpage
 \tableofcontents
+
 % CORPS DU RAPPORT
 \pagenumbering{arabic}
 \setcounter{page}{1}
@@ -126,19 +123,22 @@
 \newpage
 %\input{Cadrage de besoin et analyse}
 \newpage
-  %\input{Conception et architecture}
+%\input{Conception et architecture}
 \newpage
-  \input{Mise en œuvre}
+\input{Mise en œuvre}
 \newpage
-  %\input{Test et résultats}
+%\input{Test et résultats}
 \newpage
- %\input{Conclusion générale}
+%\input{Conclusion générale}
+
 % BIBLIOGRAPHIE
 \newpage
 \printbibliography[nottype=misc,title={Bibliographie}]
 \newpage
 \printbibliography[type=misc,title={Webographie}]
+
 % GLOSSAIRE
 \newpage
 %\input{Glossaire}
+
 \end{document}
