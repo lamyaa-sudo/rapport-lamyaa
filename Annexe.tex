@@ -1,0 +1,210 @@
+\chapter*{Annexe : Code source de l'application}
+\addcontentsline{toc}{chapter}{Annexe : Code source de l'application}
+
+%===========================================
+\section*{Annexe A : Module Réclamation (Back-end Spring Boot)}
+%===========================================
+
+\subsection*{ReclamationController.java}
+\begin{lstlisting}[language=Java]
+package com.bewize.monitorbackend.controller;
+
+import com.bewize.monitorbackend.domains.ReclamationEntity;
+import com.bewize.monitorbackend.dto.ReclamationDto;
+import com.bewize.monitorbackend.service.ReclamationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+
+@Tag(name = "Reclamations")
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/reclamations")
+@CrossOrigin(originPatterns = "*")
+public class ReclamationController {
+
+    private final ReclamationService reclamationService;
+
+    @Operation(summary = "Soumettre une nouvelle reclamation")
+    @PostMapping
+    public ResponseEntity<Map<String, Object>> creer(
+            @RequestBody ReclamationDto dto) {
+        ReclamationEntity saved = reclamationService.creer(dto);
+        return ResponseEntity.ok(Map.of(
+                "success", true,
+                "id",      saved.getId(),
+                "message", "Reclamation enregistree avec succes"
+        ));
+    }
+
+    @Operation(summary = "Lister toutes les reclamations")
+    @GetMapping
+    public ResponseEntity<List<ReclamationEntity>> lister() {
+        return ResponseEntity.ok(reclamationService.listerToutes());
+    }
+}
+\end{lstlisting}
+
+\subsection*{ReclamationService.java}
+\begin{lstlisting}[language=Java]
+package com.bewize.monitorbackend.service;
+
+import com.bewize.monitorbackend.domains.ReclamationEntity;
+import com.bewize.monitorbackend.dto.ReclamationDto;
+import com.bewize.monitorbackend.repository.ReclamationRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class ReclamationService {
+
+    private final ReclamationRepository reclamationRepository;
+
+    public ReclamationEntity creer(ReclamationDto dto) {
+        ReclamationEntity entity = ReclamationEntity.builder()
+                .prenom(dto.getPrenom())
+                .nom(dto.getNom())
+                .email(dto.getEmail())
+                .numeroEtudiant(dto.getNumeroEtudiant())
+                .statut(dto.getStatut())
+                .typeReclamation(dto.getTypeReclamation())
+                .objet(dto.getObjet())
+                .description(dto.getDescription())
+                .nomFichier(dto.getNomFichier())
+                .build();
+        return reclamationRepository.save(entity);
+    }
+
+    public List<ReclamationEntity> listerToutes() {
+        return reclamationRepository.findAll();
+    }
+}
+\end{lstlisting}
+
+\subsection*{ReclamationRepository.java}
+\begin{lstlisting}[language=Java]
+package com.bewize.monitorbackend.repository;
+
+import com.bewize.monitorbackend.domains.ReclamationEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ReclamationRepository 
+        extends JpaRepository<ReclamationEntity, Long> {
+}
+\end{lstlisting}
+
+%===========================================
+\section*{Annexe B : Module Formulaire WebView (Front-end React JS)}
+%===========================================
+
+\subsection*{CentreReclamations.tsx}
+\begin{lstlisting}[language=Java]
+// src/pages/CentreReclamations.tsx
+import { useState, useRef } from "react";
+import { insertReclamation } from "../lib/reclamations";
+
+interface FormState {
+  prenom: string;
+  nom: string;
+  email: string;
+  numeroEtudiant: string;
+  statut: string;
+  typeReclamation: string;
+  objet: string;
+  description: string;
+  nomFichier: string;
+}
+
+const INIT: FormState = {
+  prenom:"", nom:"", email:"", numeroEtudiant:"",
+  statut:"", typeReclamation:"", objet:"", 
+  description:"", nomFichier:"",
+};
+
+export default function CentreReclamations() {
+  const [form, setForm]       = useState<FormState>(INIT);
+  const [loading, setLoading] = useState(false);
+  const fileRef               = useRef<HTMLInputElement>(null);
+
+  const set = (key: keyof FormState) =>
+    (e: React.ChangeEvent
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+      setForm(f => ({ ...f, [key]: e.target.value }));
+
+  const handleSubmit = async () => {
+    const { prenom, nom, email, objet, 
+            description, statut, typeReclamation } = form;
+
+    if (!prenom || !nom || !email || !objet || 
+        !description || !statut || !typeReclamation) return;
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+
+    setLoading(true);
+    try {
+      const id = await insertReclamation({
+        prenom, nom, email,
+        numeroEtudiant: form.numeroEtudiant || undefined,
+        statut, typeReclamation, objet, description,
+        nomFichier: form.nomFichier || undefined,
+      });
+      setForm(INIT);
+      if (fileRef.current) fileRef.current.value = "";
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Centre de reclamations</h1>
+      <button onClick={handleSubmit} disabled={loading}>
+        {loading ? "Envoi en cours..." : "Envoyer la reclamation"}
+      </button>
+    </div>
+  );
+}
+\end{lstlisting}
+
+%===========================================
+\section*{Annexe C : Module Dashboard Monitor (Front-end React JS)}
+%===========================================
+
+\subsection*{reclamation.mapper.ts}
+\begin{lstlisting}[language=Java]
+/**
+ * Reclamation mapper - transforms backend data to UI format
+ */
+import type { ReclamationBackend, ReclamationUI } 
+    from "../model/reclamation.types";
+
+const formatDate = (value: string | undefined): string => {
+  if (!value) return "-";
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return value;
+  return parsed.toLocaleDateString("fr-FR");
+};
+
+export const mapReclamationToUI = (
+  backend: ReclamationBackend,
+): ReclamationUI => ({
+  id:              backend.id,
+  nom:             `${backend.prenom} ${backend.nom}`.trim() || "-",
+  email:           backend.email || "-",
+  statut:          backend.statut || "-",
+  typeReclamation: backend.typeReclamation || "-",
+  objet:           backend.objet || "-",
+  description:     backend.description || "-",
+  date:            formatDate(backend.dateCreation),
+});
+\end{lstlisting}
