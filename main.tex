@@ -78,13 +78,44 @@
 \usetikzlibrary{shapes,arrows,positioning,fit,calc}
 \usepackage[titles]{tocloft}
 \setlength{\cftbeforefigskip}{0pt}
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{orange},
+    breaklines=true,
+    breakatwhitespace=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    showstringspaces=false,
+    tabsize=2,
+    xleftmargin=15pt
+}
 
 \begin{document}
 
-% PAGE DE GARDE (ton PDF rempli dans Word)
+% -----------------------------------------------
+% 1. PAGE DE GARDE
+% -----------------------------------------------
 \includepdf{pagedeGarde.pdf}
 
-% Bismillah
+% -----------------------------------------------
+% 2. FEUILLE BLANCHE (obligatoire FST)
+% -----------------------------------------------
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+% -----------------------------------------------
+% 3. DEUXIEME PAGE DE GARDE (obligatoire FST)
+% -----------------------------------------------
+\includepdf{pagedeGarde.pdf}
+
+% -----------------------------------------------
+% 4. Bismillah
+% -----------------------------------------------
 \newpage
 \thispagestyle{empty}
 \vspace*{\fill}
@@ -93,29 +124,51 @@
 \end{center}
 \vspace*{\fill}
 
+% -----------------------------------------------
 % PAGES PRELIMINAIRES
+% numerotation romaine, sans numero de page
+% (obligatoire FST)
+% -----------------------------------------------
 \pagenumbering{roman}
-\setcounter{page}{1}
-\pagestyle{plain}
+\pagestyle{empty}
+
+% 5. DEDICACES (sans numero)
 \newpage
 \input{Dedicace}
+
+% 6. REMERCIEMENTS (sans numero)
 \newpage
 \input{remerciement}
+
+% 7. RESUME (sans numero)
 \newpage
 \input{Résumé}
+
+% 8. LISTE DES ABREVIATIONS (sans numero)
 \newpage
 \input{Abreviations}
+
+% 9. LISTE DES TABLEAUX (sans numero)
 \newpage
 \listoftables
+
+% 10. LISTE DES FIGURES (sans numero)
 \newpage
 \listoffigures
+
+% 11. SOMMAIRE (sans numero)
 \newpage
 \tableofcontents
 
+% -----------------------------------------------
 % CORPS DU RAPPORT
+% numerotation arabe commence a l'introduction
+% (obligatoire FST)
+% -----------------------------------------------
 \pagenumbering{arabic}
 \setcounter{page}{1}
 \pagestyle{fancy}
+
 \newpage
 \input{Introduction}
 \newpage
@@ -130,17 +183,32 @@
 \input{Test et résultats}
 \newpage
 \input{Conclusion générale}
-% ANNEXE
+
+% -----------------------------------------------
+% 12. TABLE DES MATIERES
+% apres le corps du rapport (obligatoire FST)
+% -----------------------------------------------
 \newpage
-\appendix
-\input{Annexe}
-% BIBLIOGRAPHIE
+\tableofcontents
+
+% -----------------------------------------------
+% 13. BIBLIOGRAPHIE (avant les annexes FST)
+% -----------------------------------------------
 \newpage
 \printbibliography[nottype=misc,title={Bibliographie}]
 \newpage
 \printbibliography[type=misc,title={Webographie}]
 
+% -----------------------------------------------
+% 14. ANNEXES (apres la bibliographie FST)
+% -----------------------------------------------
+\newpage
+\appendix
+\input{Annexe}
+
+% -----------------------------------------------
 % GLOSSAIRE
+% -----------------------------------------------
 \newpage
 \input{Glossaire}
 
