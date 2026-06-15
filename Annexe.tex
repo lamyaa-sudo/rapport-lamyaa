@@ -1,8 +1,8 @@
-\chapter*{Annexe : Code source de l'application}
-\addcontentsline{toc}{chapter}{Annexe : Code source de l'application}
+\chapter*{Annexe : Code source de la fonctionnalité de recueil de réclamations}
+\addcontentsline{toc}{chapter}{Annexe : Code source de la fonctionnalité de recueil de réclamations}
 
 %===========================================
-\section*{Annexe A : Module Réclamation (Back-end Spring Boot)}
+\section*{Annexe A : Back-end Spring Boot — Gestion des réclamations}
 %===========================================
 
 \subsection*{ReclamationController.java}
@@ -17,7 +17,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +49,7 @@ public class ReclamationController {
 }
 \end{lstlisting}
 
+\newpage
 \subsection*{ReclamationService.java}
 \begin{lstlisting}[language=Java]
 package com.bewize.monitorbackend.service;
@@ -59,7 +59,6 @@ import com.bewize.monitorbackend.dto.ReclamationDto;
 import com.bewize.monitorbackend.repository.ReclamationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -89,6 +88,7 @@ public class ReclamationService {
 }
 \end{lstlisting}
 
+\newpage
 \subsection*{ReclamationRepository.java}
 \begin{lstlisting}[language=Java]
 package com.bewize.monitorbackend.repository;
@@ -98,18 +98,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReclamationRepository 
+public interface ReclamationRepository
         extends JpaRepository<ReclamationEntity, Long> {
 }
 \end{lstlisting}
 
 %===========================================
-\section*{Annexe B : Module Formulaire WebView (Front-end React JS)}
+\newpage
+\section*{Annexe B : Formulaire WebView — Saisie des réclamations}
 %===========================================
 
 \subsection*{CentreReclamations.tsx}
 \begin{lstlisting}[language=Java]
-// src/pages/CentreReclamations.tsx
 import { useState, useRef } from "react";
 import { insertReclamation } from "../lib/reclamations";
 
@@ -127,7 +127,7 @@ interface FormState {
 
 const INIT: FormState = {
   prenom:"", nom:"", email:"", numeroEtudiant:"",
-  statut:"", typeReclamation:"", objet:"", 
+  statut:"", typeReclamation:"", objet:"",
   description:"", nomFichier:"",
 };
 
@@ -142,10 +142,10 @@ export default function CentreReclamations() {
       setForm(f => ({ ...f, [key]: e.target.value }));
 
   const handleSubmit = async () => {
-    const { prenom, nom, email, objet, 
+    const { prenom, nom, email, objet,
             description, statut, typeReclamation } = form;
 
-    if (!prenom || !nom || !email || !objet || 
+    if (!prenom || !nom || !email || !objet ||
         !description || !statut || !typeReclamation) return;
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
@@ -177,15 +177,13 @@ export default function CentreReclamations() {
 \end{lstlisting}
 
 %===========================================
-\section*{Annexe C : Module Dashboard Monitor (Front-end React JS)}
+\newpage
+\section*{Annexe C : Dashboard Monitor — Consultation des réclamations}
 %===========================================
 
 \subsection*{reclamation.mapper.ts}
 \begin{lstlisting}[language=Java]
-/**
- * Reclamation mapper - transforms backend data to UI format
- */
-import type { ReclamationBackend, ReclamationUI } 
+import type { ReclamationBackend, ReclamationUI }
     from "../model/reclamation.types";
 
 const formatDate = (value: string | undefined): string => {
