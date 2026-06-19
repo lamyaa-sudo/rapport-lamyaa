@@ -738,68 +738,75 @@ se déroule en dix étapes, de l'action initiale de l'utilisateur jusqu'à
 l'affichage du message de confirmation.
 
 \subsection{Diagramme de classes}
-Le diagramme de classes représente la structure statique du système. 
-L'architecture back-end suit le pattern en couches de Spring Boot : 
-Controller, Service, Repository et Entity.
+Le diagramme de classes représente la structure statique du système, 
+centrée sur la gestion des réclamations. L'architecture back-end suit 
+le pattern en couches de Spring Boot : Controller, Service, Repository 
+et Entity.
 
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
     class/.style={rectangle, draw=black!50, fill=white,
-                  minimum width=3.5cm, font=\tiny},
+                  minimum width=3.8cm, font=\scriptsize},
     header/.style={rectangle, draw=black!50, fill=gray!20,
-                   minimum width=3.5cm, minimum height=0.5cm,
-                   align=center, font=\tiny\bfseries},
+                   minimum width=3.8cm, minimum height=0.5cm,
+                   align=center, font=\scriptsize\bfseries},
     arrow/.style={->, >=stealth, thick},
-    dasharrow/.style={->, >=stealth, dashed}
 ]
-\node[header, fill=violet!20] (ch) at (0,0) {FeedbackController};
-\node[class, below=0pt of ch, align=left, text width=3.3cm, 
-      minimum height=1.4cm] (cb) 
-    {- feedbackService\\
+% --- Couche haute : Controller / Service / Repository ---
+\node[header, fill=violet!20] (ch) at (0,0) {ReclamationController};
+\node[class, below=0pt of ch, align=left, text width=3.6cm, 
+      minimum height=1.6cm] (cb) 
+    {- service\\
      \hline\\
-     + createFeedback()\\+ getAllFeedbacks()\\+ updateStatut()};
-\node[header, fill=teal!20] (sh) at (4.5,0) {FeedbackService};
-\node[class, below=0pt of sh, align=left, text width=3.3cm,
-      minimum height=1.4cm] (sb) 
-    {- feedbackRepo\\
+     + creer(r)\\+ listerToutes()\\+ changerStatut(id, s)};
+
+\node[header, fill=teal!20] (sh) at (5.2,0) {ReclamationService};
+\node[class, below=0pt of sh, align=left, text width=3.6cm,
+      minimum height=1.6cm] (sb) 
+    {- repository\\
      \hline\\
-     + save(feedback)\\+ findAll()\\+ updateStatut()\\+ getStats()};
-\node[header, fill=orange!20] (rh) at (9,0) {FeedbackRepository};
-\node[class, below=0pt of rh, align=left, text width=3.3cm,
-      minimum height=1.4cm] (rb) 
+     + enregistrer(r)\\+ consulterToutes()\\+ changerStatut(id, s)};
+
+\node[header, fill=orange!20] (rh) at (10.4,0) {ReclamationRepository};
+\node[class, below=0pt of rh, align=left, text width=3.6cm,
+      minimum height=1.6cm] (rb) 
     {\textit{«interface»}\\JpaRepository\\
      \hline\\
-     + findByType()\\+ findByStatut()};
-\node[header, fill=red!10] (fh) at (4.5,-4.5) {Feedback};
-\node[class, below=0pt of fh, align=left, text width=3.3cm,
-      minimum height=1.8cm] (fb) 
-    {- id: Long\\- type: String\\- message: String\\
-     - dateEnvoi: DateTime\\- statut: String\\- utilisateurId: Long\\
+     + findByStatut(s)\\+ findByType(t)};
+
+% --- Couche basse : Entites ---
+\node[header, fill=red!10] (fh) at (3.5,-5) {Reclamation};
+\node[class, below=0pt of fh, align=left, text width=3.8cm,
+      minimum height=2cm] (fb) 
+    {- id : Long\\- type : String\\- message : String\\
+     - dateEnvoi : Date\\- statut : String\\
      \hline\\
-     + getters()\\+ setters()};
-\node[header, fill=gray!20] (uh) at (9,-4.5) {Utilisateur};
-\node[class, below=0pt of uh, align=left, text width=3.3cm,
-      minimum height=1.2cm] (ubb) 
-    {- id: Long\\- nom: String\\- email: String\\
+     + getters/setters()};
+
+\node[header, fill=blue!10] (uh) at (9.5,-5) {Utilisateur};
+\node[class, below=0pt of uh, align=left, text width=3.4cm,
+      minimum height=1.4cm] (ubb) 
+    {- id : Long\\- nom : String\\- email : String\\
      \hline\\
-     + getters()\\+ setters()};
-\draw[arrow] (cb) -- (sb) node[midway, above, font=\tiny] {uses};
-\draw[arrow] (sb) -- (rb) node[midway, above, font=\tiny] {uses};
-\draw[arrow] (sb) -- (fh) node[midway, right, font=\tiny] {manages};
-\draw[dasharrow] (rb) -- (fh);
-\draw[arrow] (fb) -- (ubb) node[midway, above, font=\tiny] {belongs to};
+     + getters/setters()};
+
+% --- Relations ---
+\draw[arrow] (cb) -- (sb) node[midway, above, font=\scriptsize] {utilise};
+\draw[arrow] (sb) -- (rb) node[midway, above, font=\scriptsize] {utilise};
+\draw[arrow] (sb.south) -- (fh.north) node[midway, right, font=\scriptsize] {gère};
+\draw[arrow] (fb.east) -- (ubb.west) node[midway, above, font=\scriptsize] {soumise par};
 \end{tikzpicture}
-\caption{Diagramme de classes}
+\caption{Diagramme de classes — Gestion des réclamations}
 \label{fig:classes}
 \end{figure}
 
 La figure \ref{fig:classes} présente le diagramme de classes du système, 
-organisé selon le pattern en couches de Spring Boot. Le FeedbackController 
-reçoit les requêtes HTTP et délègue au FeedbackService qui implémente 
-la logique métier. Le FeedbackService utilise le FeedbackRepository 
+organisé selon le pattern en couches de Spring Boot. Le ReclamationController 
+reçoit les requêtes HTTP et délègue au ReclamationService qui implémente 
+la logique métier. Le ReclamationService utilise le ReclamationRepository 
 pour persister les données dans PostgreSQL via Spring Data JPA. La classe 
-Feedback est l'entité centrale du modèle, liée à la classe Utilisateur.
+Reclamation est l'entité centrale du modèle, liée à la classe Utilisateur.
 
 \subsection{Conception de la base de données}
 
